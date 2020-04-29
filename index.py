@@ -116,6 +116,7 @@ def display_page(pathname):
         return app_credits.layout
 
 #START THE SERVER
+server = app.server
 if __name__ == '__main__':
     #port=80, host='0.0.0.0', 
     app.run_server(debug=True)
