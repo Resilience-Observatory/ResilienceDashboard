@@ -30,37 +30,37 @@ from app import app
 #Load data
 keywords = pd.read_csv('data/CoronaMadrid_keywords_ordered_currentflowbetweenness_7_nonfiltered.csv')
 kw_params = ['freq','cfbetweenness','eigenvalue']
-#spain_communities_geojson_path = 'spain-communities.geojson'
-#spain_communities_geojson_url = 'https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/spain-communities.geojson'
-#if not os.path.exists(spain_communities_geojson_path):
-#    urlretrieve(spain_communities_geojson_url, spain_communities_geojson_path)
-#spain_communities_geojson = gpd.read_file(spain_communities_geojson_path)
-#js = json.loads(spain_communities_geojson.to_json())
-#poverty_risk = pd.read_csv('data/poverty_risk.tsv', sep='\t')
-#eu_country_codes = poverty_risk.iloc[:,0].apply(lambda x: x[-2:]).unique()
 inform_covid = pd.read_csv('data/inform-covid-analysis-v01_page3-unix.csv', sep=';')
 
-#def get_country_name(cc):
-#    try:
-#        return CC[cc]
-#    except:
-#        pass
-#eu_countries = []
-#for cc in eu_country_codes:
-#    country_name = get_country_name(cc)
-#    if country_name is not None:
-#        eu_countries.append(country_name)
-fig_eu = px.choropleth(locationmode='country names',
-                       locations=inform_covid['Country'],
-                       color_continuous_scale='Greens',
-                       color=inform_covid['INFORM COVID-19 RISK'].apply(lambda x: float(x.replace(',','.'))),
-                       scope='europe')
-fig_eu.update_layout(
-    legend_title='COVID-19 risk index',
-    height=500,
-    margin=dict(r=0, l=0, t=0, b=0)
+data = [dict(
+    type='choropleth',
+    autocolorscale = True,
+    locations = inform_covid['Country'],
+    z = inform_covid['INFORM COVID-19 RISK'].apply(lambda x: float(x.replace(',','.'))),
+    locationmode = 'country names',
+    marker = dict(
+        line = dict (
+            color = 'rgb(255,255,255)',
+            width = 2
+        ) ),
+    colorbar = dict(
+        title = "COVID-19 RISK",
+        thickness=10),
+)]
+
+layout = dict(
+        title = '',
+        geo = dict(
+            scope='europe',
+            showlakes = True,
+            lakecolor = 'rgb(255, 255, 255)'
+        ),
+        hovermode='closest',
+        margin=dict(r=0, l=0, t=0, b=0)
 )
-countries = fig_eu.data[0]
+    
+fig_eu = go.FigureWidget(data=data, layout=layout)
+
 
 #Preload graph
 with open('data/PostsCorMadNet7_c.cnf', 'rb') as f:
@@ -109,27 +109,22 @@ pio.templates.default = 'plotly_white'
 layout = html.Div(className = '', children = [
     html.Div(className = 'box', children = [
         html.Div(className = 'columns', children = [
-
-        ]),
-        html.Div(className = 'columns', children = [
-            html.Div(className = 'column is-narrow', children = [
-                html.H1('Twitter posts analysis',className = 'title is-2'),
+            html.Div(className = 'column is-one-third', children = [
+                dcc.Graph(
+                    id = 'graph-eu',
+                    figure = fig_eu,
+                    hoverData={'points': [{'location': 'Select a country on the map'}]}
+                )
             ]),
-            html.Div(className = 'column is-narrow', children = [
-                html.Button('New graph',className='button', id='update-button')
-            ])
+            html.Div(id = 'selected-country', className = 'column is-two-thirds'),
+        ]),
+        html.Div(className = 'column is-narrow', children = [
+            html.H1('Twitter posts analysis',className = 'title is-2'),
         ]),
         html.Div(className = 'columns', children = [
             html.Div(className = 'column', children = [
                 html.Div(className = 'columns', children = [
-                    html.Div(className = 'column is-one-third', children = [
-                        html.H1('Europe countries',className = 'title is-5'),
-                        dcc.Graph(
-                            id = 'graph-eu',
-                            figure = fig_eu
-                        )
-                    ]),
-                    html.Div(className = 'column is-two-thirds', children = [
+                    html.Div(className = 'column', children = [
                         html.H1('Posts network graph',className = 'title is-5'),
                         html.Div(id='posts-net-graph', className='box')
                     ])
@@ -145,7 +140,7 @@ layout = html.Div(className = '', children = [
                             [
                                 "Order parameter",
                                 dcc.Dropdown(
-                                    id="param-selector",
+                                    id="param-selector-1",
                                     options=[{"label": i, "value": i} for i in kw_params],
                                     placeholder='Select hot topics order param',
                                     value=kw_params[1],
@@ -163,7 +158,7 @@ layout = html.Div(className = '', children = [
                             [
                                 "Axis type",
                                 dcc.Dropdown(
-                                    id="axis-type",
+                                    id="axis-type-1",
                                     options=[{"label": i, "value": i} for i in ['linear','log']],
                                     placeholder='Select axis type',
                                     value='log',
@@ -176,6 +171,60 @@ layout = html.Div(className = '', children = [
                 ]),
                 html.Div(id='hot-topics', className='box')
             ])
+        ]),
+        html.Div(className = 'column is-narrow', children = [
+            html.H1('Twitter users analysis',className = 'title is-2'),
+        ]),
+        html.Div(className = 'columns', children = [
+            html.Div(className = 'column', children = [
+                html.Div(className = 'columns', children = [
+                    html.Div(className = 'column', children = [
+                        html.H1('Users network graph',className = 'title is-5'),
+                        html.Div(id='users-net-graph', className='box')
+                    ])
+                ])
+            ]),
+            html.Div(className = 'column is-one-third', children = [
+                html.Div(className = 'columns', children = [
+                    html.Div(className = 'column is-narrow', children = [
+                        html.H1('Relevant users',className = 'title is-5')
+                    ]),
+                    html.Div(className = 'column is-narrow', children = [
+                        html.Label(
+                            [
+                                "Order parameter",
+                                dcc.Dropdown(
+                                    id="param-selector-2",
+                                    options=[{"label": i, "value": i} for i in kw_params],
+                                    placeholder='Select relevant users order param',
+                                    value=kw_params[1],
+                                    searchable=True,
+                                    multi=False,
+                                    style=dict(
+                                        width = 300
+                                    )
+                                )
+                            ]
+                        )
+                    ]),
+                    html.Div(className = 'column is-narrow', children = [
+                        html.Label(
+                            [
+                                "Axis type",
+                                dcc.Dropdown(
+                                    id="axis-type-2",
+                                    options=[{"label": i, "value": i} for i in ['linear','log']],
+                                    placeholder='Select axis type',
+                                    value='log',
+                                    searchable=True,
+                                    multi=False
+                                )
+                            ]
+                        )
+                    ])
+                ]),
+                html.Div(id='relevant-users', className='box')
+            ])
         ])
 
     ])
@@ -186,10 +235,31 @@ layout = html.Div(className = '', children = [
 
 # CALLBACKS
 
+# CALLBACK 0 - Country selector
+@app.callback(Output(component_id = 'selected-country',component_property = 'children'),
+              [Input('graph-eu', 'hoverData')])
+def gen_selected_country(hoverData) :
+
+    try :
+        selected_country = hoverData['points'][0]['location']
+        covid_risk = hoverData['points'][0]['z']
+        return [
+            html.H1(selected_country,className='title is-1'),
+            html.H1('COVID-19 RISK : {}'.format(covid_risk),className='title is-2'),
+            html.H1('',className='title is-2'),
+            html.H1('Data analysis for selected country below...',className='title is-3'),
+        ]
+    except :
+        return [
+            html.H1('No country selected',className='title is-1')
+        ]
+    
+
 # CALLBACK 1 - Posts Network Graph Generation
 @app.callback(Output(component_id = 'posts-net-graph',component_property = 'children'),
-              [Input(component_id = 'update-button',component_property = 'n_clicks')])
-def gen_random_graph(n_clicks) :
+              [Input(component_id = 'param-selector-1',component_property = 'value'),
+              Input(component_id = 'axis-type-1',component_property = 'value')])
+def gen_posts_net_graph(selected_param,axis_type) :
     trace3=go.Scatter(x=Xed,
         y=Yed,
         mode='lines',
@@ -249,9 +319,9 @@ def gen_random_graph(n_clicks) :
 
 # CALLBACK 2 - Hot topics barchart
 @app.callback(Output(component_id = 'hot-topics',component_property = 'children'),
-              [Input(component_id = 'param-selector',component_property = 'value'),
-              Input(component_id = 'axis-type',component_property = 'value')])
-def gen_random_graph(selected_param,axis_type) :
+              [Input(component_id = 'param-selector-1',component_property = 'value'),
+              Input(component_id = 'axis-type-1',component_property = 'value')])
+def gen_hot_topics(selected_param,axis_type) :
 
     #Sort values
     kws_df = keywords.sort_values(selected_param,ascending=False).iloc[0:15]
@@ -280,6 +350,106 @@ def gen_random_graph(selected_param,axis_type) :
     return [
         dcc.Graph(
             id = 'graph-2',
+            figure = fig
+        )
+    ]
+
+
+# CALLBACK 3 - Users Network Graph Generation
+@app.callback(Output(component_id = 'users-net-graph',component_property = 'children'),
+              [Input(component_id = 'param-selector-2',component_property = 'value'),
+              Input(component_id = 'axis-type-2',component_property = 'value')])
+def gen_users_net_graph(selected_param,axis_type) :
+    trace3=go.Scatter(x=Xed,
+        y=Yed,
+        mode='lines',
+        line=dict(
+            color=colors[2],
+            width=1
+        ),
+        opacity=0.5,
+        hoverinfo='none'
+    )
+    trace4=go.Scatter(x=Xv,
+        y=Yv,
+        mode='markers',
+        name='net',
+        marker=dict(
+            symbol='circle-dot',
+            size=freqs,
+            color=colors[0],
+            line=dict(
+                color='black',
+                width=0.5
+            ),
+            opacity=0.9
+        ),
+        text=labels,
+        hoverinfo='text'
+    )
+    layout2d = go.Layout(
+        title="",
+        height=500,
+        showlegend=False,
+        margin=dict(r=0, l=0, t=0, b=0),
+        xaxis = {
+            'showgrid':False,
+            'visible':False
+        },
+        yaxis = {
+            'showgrid':False,
+            'showline':False,
+            'zeroline':False,
+            'autorange':'reversed',
+            'visible':False
+        }
+    )
+
+
+    data1=[trace3, trace4]
+    fig1=go.Figure(data=data1, layout=layout2d)
+
+    return [
+        dcc.Graph(
+            id = 'graph-3',
+            figure = fig1
+        )
+    ]
+
+
+# CALLBACK 4 - Most relevant users
+@app.callback(Output(component_id = 'relevant-users',component_property = 'children'),
+              [Input(component_id = 'param-selector-2',component_property = 'value'),
+              Input(component_id = 'axis-type-2',component_property = 'value')])
+def gen_relevant_users(selected_param,axis_type) :
+
+    #Sort values
+    kws_df = keywords.sort_values(selected_param,ascending=False).iloc[0:15]
+
+    unique_kws = kws_df.word.unique().tolist()
+
+    fig = go.Figure()
+    for unique_kw in unique_kws :
+        kw_df = kws_df[kws_df.word == unique_kw]
+        fig.add_trace(go.Bar(x=[unique_kw],
+            y=[kw_df[selected_param].iloc[0]],
+            name=unique_kw
+        ))
+
+
+
+    fig.update_layout(
+        height=450,
+        margin=dict(r=0, l=0, t=0, b=0),
+        yaxis=dict(
+            title=selected_param,
+            type=axis_type
+        )
+    )
+
+    return [
+        dcc.Graph(
+            id = 'graph-4',
             figure = fig
         )
     ]

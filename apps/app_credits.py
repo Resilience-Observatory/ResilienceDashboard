@@ -63,11 +63,11 @@ members_boxes = [
 
 #LAYOUT
 layout = html.Div(className = '', children = [
-    html.Div(className = 'box', children = [
-        html.H1('Description of the project',className = 'title is-4'),
+    html.H1('Description of the project',className = 'title is-4'),
         html.Div(className = 'box', children = [
             html.H1('Resilience in communities and cities affected by the COVID-19 can be effectively built upon AI-powered Collective Intelligence. Understanding social narratives is key to design actions and policies for accelerating a human centered recovery. We propose a dashboard to measure the social impact of the COVID-19, the social response and the changes produced based on analytics of social media and surveys making use of networks, machine learning, natural language processing and dynamics systems tools integrated with epidemiological data sources. This dashboard will help make a real-time monitoring of the pandemic evolution, interconnect stakeholders and design projects. This system will be useful both for short-term decision making and long-term policies definition, and will definitely help Europe to recover from the current pandemics, and to be better prepared for future crises or pandemics.',className = 'subtitle is-6'),
         ]),
+    html.Div(className = 'box', children = [
         html.H1('Members',className = 'title is-4'),
         html.Div(className = 'columns', children = members_boxes[0:3]),
         html.Div(className = 'columns', children = members_boxes[3:6]),

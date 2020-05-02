@@ -26,6 +26,9 @@ app.index_string = '''
                 .navlogo {
                     background: linear-gradient(to left, #009999, #white);
                 }
+                .navbar {
+                    height : 5rem
+                }
             </style>
         {%favicon%}
         {%css%}
@@ -38,7 +41,7 @@ app.index_string = '''
           <div class="navbar-brand">
 
             <a class="navbar-item" href="/">
-                <img class="logo1" src="/assets/logo.png" alt="Resilience Observatory" width="75" height="50">
+                <img class="logo1" src="/assets/logo.png" alt="Resilience Observatory" width="75" height="100">
             </a>
             
             <div class="navbar-burger burger" data-target="navMenu">
