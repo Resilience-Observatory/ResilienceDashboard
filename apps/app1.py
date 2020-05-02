@@ -80,16 +80,16 @@ layout = html.Div(className = '', children = [
         html.Div(className = 'columns', children = [
             html.Div(className = 'column', children = [
                 html.Div(className = 'colums', children = [
-                    html.Div(className = 'column', children = [
-                        html.H1('Posts network graph',className = 'title is-4'),
+                    html.Div(className = 'column is-two-thirds', children = [
+                        html.H1('Posts network graph',className = 'title is-5'),
                     ])
                 ]),
                 html.Div(id='posts-net-graph', className='box')
             ]),
             html.Div(className = 'column is-one-third', children = [
                 html.Div(className = 'columns', children = [
-                    html.Div(className = 'column is-one-third', children = [
-                        html.H1('Hot topics',className = 'title is-4')
+                    html.Div(className = 'column is-narrow', children = [
+                        html.H1('Hot topics',className = 'title is-5')
                     ]),
                     html.Div(className = 'column is-narrow', children = [
                         html.Label(
@@ -109,7 +109,7 @@ layout = html.Div(className = '', children = [
                             ]
                         )
                     ]),
-                    html.Div(className = 'column', children = [
+                    html.Div(className = 'column is-narrow', children = [
                         html.Label(
                             [
                                 "Axis type",
@@ -141,24 +141,33 @@ def gen_random_graph(n_clicks) :
     trace3=go.Scatter(x=Xed,
         y=Yed,
         mode='lines',
-        line=dict(color='rgb(210,210,210)', width=1),
+        line=dict(
+            color=colors[2], 
+            width=1
+        ),
+        opacity=0.5,
         hoverinfo='none'
     )
     trace4=go.Scatter(x=Xv,
         y=Yv,
         mode='markers',
         name='net',
-        marker=dict(symbol='circle-dot',
-                        size=freqs,
-                        color='#6959CD',
-                        line=dict(color='rgb(50,50,50)', width=0.5)
-                        ),
+        marker=dict(
+            symbol='circle-dot',
+            size=freqs,
+            color=colors[0],
+            line=dict(
+                color='black', 
+                width=0.5
+            ),
+            opacity=0.9
+        ),
         text=labels,
         hoverinfo='text'
     )
     layout2d = go.Layout(
         title="",
-        height=600,
+        height=500,
         showlegend=False,
         margin=dict(r=0, l=0, t=0, b=0),
         xaxis = {
@@ -208,7 +217,7 @@ def gen_random_graph(selected_param,axis_type) :
     
 
     fig.update_layout(
-        height=570,
+        height=450,
         margin=dict(r=0, l=0, t=0, b=0),
         yaxis=dict(
             title=selected_param,
