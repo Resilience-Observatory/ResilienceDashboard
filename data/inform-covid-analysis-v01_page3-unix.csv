@@ -1,0 +1,192 @@
+Country;ISO 3;INFORM COVID-19 RISK;COVID-19 RISK CLASS;COVID-19 HAZARD & EXPOSURE;COVID-19 HAZARD & EXPOSURE CLASS;COVID-19 VULNERABILITY;VULNERABILITY;VULNERABILITY CLASS;COVID-19 LACK OF COPING CAPACITY;LACK OF COPING CAPACITY;LACK OF COPING CAPACITY CLASS;INFORM RISK;RISK CLASS;INFORM SEVERITY INDEX;INFORM SEVERITY INDEX CLASS;INFORM SEVERITY INDEX CLASS;INFORM COVID Risk + INFORM Risk;INFORM COVID - INFORM RISK 
+Afghanistan;AFG;6,8;Very High;6,4;Very High;3,5;6,4;Very High;7,0;7,7;Very High;8,1;Very High;4,5;5;Very High;7,5;-1,3
+Albania;ALB;4,2;Medium;3,6;Medium;5,7;4,1;High;5,0;4,9;High;3,0;Low;-;-;-;3,6;1,2
+Algeria;DZA;3,9;Medium;4,3;High;4,2;3,6;Medium;2,3;3,9;Medium;4,0;Medium;1,8;2;Low;4,0;-0,1
+Angola;AGO;5,6;High;6,5;Very High;3,0;4,3;High;4,6;6,2;High;5,1;High;-;-;-;5,4;0,5
+Antigua and Barbuda;ATG;3,6;Medium;2,8;Medium;4,0;3,4;Medium;5,4;4,9;High;2,4;Low;-;-;-;3,0;1,2
+Argentina;ARG;3,4;Low;2,8;Medium;4,6;3,2;Medium;4,3;4,2;High;2,5;Low;-;-;-;3,0;0,9
+Armenia;ARM;3,6;Medium;2,7;Medium;6,1;4,4;High;3,4;3,8;Medium;3,3;Low;-;-;-;3,5;0,3
+Australia;AUS;2,1;Low;2,5;Low;5,1;3,5;Medium;0,5;1,1;Very Low;2,3;Low;-;-;-;2,2;-0,2
+Austria;AUT;3,0;Low;2,5;Low;6,8;4,7;High;3,3;2,4;Low;1,6;Very Low;-;-;-;2,3;1,4
+Azerbaijan;AZE;3,9;Medium;4,1;High;4,3;3,8;Medium;3,4;3,9;Medium;4,4;Medium;-;-;-;4,2;-0,5
+Bahamas;BHS;3,9;Medium;3,4;Medium;4,2;3,9;Medium;5,0;4,4;High;2,7;Low;1,8;2;Low;3,3;1,2
+Bahrain;BHR;3,9;Medium;6,4;Very High;4,3;2,9;Medium;1,9;3,1;Medium;1,3;Very Low;-;-;-;2,6;2,6
+Bangladesh;BGD;5,2;High;5,7;High;3,9;4,6;High;4,6;5,5;High;6,0;High;3,3;4;High;5,6;-0,8
+Barbados;BRB;4,0;Medium;3,0;Medium;6,9;4,8;High;5,0;4,3;High;2,0;Low;-;-;-;3,0;2,0
+Belarus;BLR;3,8;Medium;2,9;Medium;6,3;4,2;High;5,0;4,5;High;1,8;Very Low;-;-;-;2,8;2,0
+Belgium;BEL;2,8;Low;3,4;Medium;7,0;4,7;High;1,0;1,4;Very Low;1,9;Very Low;-;-;-;2,4;0,9
+Belize;BLZ;3,8;Medium;2,6;Low;4,0;3,6;Medium;5,9;5,7;High;3,7;Medium;-;-;-;3,8;0,1
+Benin;BEN;5,8;High;7,0;Very High;2,9;4,1;High;7,0;6,7;Very High;4,1;Medium;-;-;-;5,0;1,7
+Bhutan;BTN;4,1;Medium;3,9;Medium;2,7;3,9;Medium;4,9;4,6;High;3,2;Low;-;-;-;3,7;0,9
+Bolivia;BOL;4,9;Medium;4,6;High;3,8;3,8;Medium;7,5;6,7;Very High;4,2;Medium;-;-;-;4,6;0,7
+Bosnia and Herzegovina;BIH;4,1;Medium;2,1;Low;7,2;5,4;High;7,1;6,2;High;3,7;Medium;-;-;-;3,9;0,4
+Botswana;BWA;4,7;Medium;3,9;Medium;4,3;4,3;High;7,4;6,2;High;3,0;Low;-;-;-;3,9;1,7
+Brazil;BRA;3,5;Medium;3,0;Medium;4,4;3,7;Medium;1,9;3,7;Medium;4,7;Medium;1,8;2;Low;4,1;-1,2
+Brunei Darussalam;BRN;3,1;Low;3,9;Medium;4,0;2,7;Medium;2,5;2,8;Medium;1,6;Very Low;-;-;-;2,4;1,5
+Bulgaria;BGR;3,7;Medium;2,7;Medium;7,8;5,6;High;3,1;3,3;Medium;2,4;Low;-;-;-;3,1;1,3
+Burkina Faso;BFA;6,3;High;7,7;Very High;2,5;4,7;High;7,3;6,9;Very High;6,4;High;3,0;3;Medium;6,4;-0,1
+Burundi;BDI;6,5;Very High;6,8;Very High;2,8;5,4;High;7,6;7,6;Very High;6,1;High;2,8;3;Medium;6,3;0,4
+Cabo Verde;CPV;4,5;Medium;4,7;High;3,3;3,4;Medium;6,5;5,6;High;2,5;Low;-;-;-;3,5;2,0
+Cambodia;KHM;4,9;Medium;4,9;High;3,6;4,1;High;5,2;5,9;High;4,8;Medium;-;-;-;4,9;0,1
+Cameroon;CMR;5,7;High;6,4;Very High;2,4;4,6;High;5,6;6,4;Very High;6,6;Very High;3,3;4;High;6,2;-0,9
+Canada;CAN;2,0;Low;2,0;Low;5,7;3,9;Medium;0,1;1,1;Very Low;2,4;Low;-;-;-;2,2;-0,4
+Central African Republic;CAF;7,6;Very High;6,5;Very High;2,8;7,3;Very High;9,4;9,1;Very High;7,9;Very High;3,7;4;High;7,8;-0,3
+Chad;TCD;7,2;Very High;7,7;Very High;2,8;5,9;High;7,3;8,3;Very High;7,5;Very High;3,9;4;High;7,4;-0,3
+Chile;CHL;3,0;Low;2,9;Medium;4,7;3,3;Medium;2,6;2,8;Medium;2,9;Low;-;-;-;3,0;0,1
+China;CHN;3,4;Low;4,0;Medium;5,2;4,1;High;0,3;2,5;Low;4,2;Medium;-;-;-;3,8;-0,8
+Colombia;COL;4,3;Medium;3,8;Medium;4,2;4,5;High;4,2;4,6;High;5,4;High;3,5;4;High;4,9;-1,1
+Comoros;COM;6,0;High;6,6;Very High;2,7;3,9;Medium;9,1;8,2;Very High;3,9;Medium;-;-;-;5,0;2,1
+Congo;COG;5,7;High;5,9;High;2,6;4,8;High;5,2;6,4;Very High;5,1;High;2,0;2;Low;5,4;0,6
+Congo DR;COD;6,8;Very High;7,9;Very High;2,6;5,7;High;5,8;6,9;Very High;7,6;Very High;4,2;5;Very High;7,2;-0,8
+Costa Rica;CRI;3,4;Low;3,2;Medium;4,5;3,5;Medium;2,8;3,4;Medium;3,0;Low;1,0;1;Very Low;3,2;0,4
+Cte d'Ivoire;CIV;5,6;High;6,6;Very High;2,7;4,4;High;5,3;6,0;High;5,9;High;-;-;-;5,8;-0,3
+Croatia;HRV;3,5;Medium;2,4;Low;8,1;5,6;High;2,6;3,1;Medium;2,2;Low;-;-;-;2,9;1,3
+Cuba;CUB;3,4;Low;2,9;Medium;6,4;4,4;High;2,5;3,0;Medium;3,2;Low;-;-;-;3,3;0,2
+Cyprus;CYP;3,3;Low;2,9;Medium;5,6;4,4;High;2,6;2,8;Medium;3,0;Low;-;-;-;3,2;0,3
+Czech Republic;CZE;3,4;Low;2,8;Medium;7,8;5,3;High;2,9;2,7;Medium;1,2;Very Low;-;-;-;2,3;2,2
+Denmark;DNK;2,1;Low;2,9;Medium;7,1;4,8;High;0,2;0,7;Very Low;1,1;Very Low;-;-;-;1,6;1,0
+Djibouti;DJI;5,5;High;5,4;High;3,3;4,6;High;6,9;6,8;Very High;5,2;High;2,5;3;Medium;5,4;0,3
+Dominica;DMA;4,2;Medium;3,9;Medium;5,3;4,0;Medium;4,0;4,8;High;3,4;Low;-;-;-;3,8;0,8
+Dominican Republic;DOM;4,3;Medium;4,2;High;4,2;3,5;Medium;5,1;5,5;High;3,7;Medium;-;-;-;4,0;0,6
+Ecuador;ECU;3,9;Medium;3,5;Medium;3,7;3,6;Medium;3,9;4,6;High;4,1;Medium;2,2;3;Medium;4,0;-0,2
+Egypt;EGY;3,6;Medium;3,0;Medium;4,6;4,0;Medium;2,2;4,0;Medium;5,1;High;1,4;2;Low;4,4;-1,5
+El Salvador;SLV;4,2;Medium;3,8;Medium;5,2;4,2;High;3,8;4,7;High;4,1;Medium;2,2;3;Medium;4,2;0,1
+Equatorial Guinea;GNQ;5,8;High;6,7;Very High;2,9;3,9;Medium;7,7;7,6;Very High;3,9;Medium;-;-;-;4,9;1,9
+Eritrea;ERI;5,9;High;6,4;Very High;2,8;4,4;High;7,0;7,2;Very High;5,2;High;3,5;4;High;5,6;0,7
+Estonia;EST;3,0;Low;2,3;Low;7,0;4,7;High;2,6;2,4;Low;0,9;Very Low;-;-;-;2,0;2,1
+Eswatini;SWZ;5,3;High;4,9;High;5,3;5,1;High;5,4;5,8;High;3,7;Medium;1,9;2;Low;4,5;1,6
+Ethiopia;ETH;5,9;High;7,6;Very High;2,5;4,7;High;4,6;5,8;High;6,3;High;3,3;4;High;6,1;-0,4
+Fiji;FJI;4,1;Medium;3,3;Medium;5,1;4,3;High;5,6;5,0;High;2,8;Low;-;-;-;3,5;1,3
+Finland;FIN;2,1;Low;2,3;Low;7,1;4,8;High;0,3;0,8;Very Low;0,6;Very Low;-;-;-;1,4;1,5
+France;FRA;3,0;Low;2,8;Medium;7,0;4,9;High;2,2;2,0;Low;2,2;Low;-;-;-;2,6;0,8
+Gabon;GAB;5,0;High;5,0;High;2,7;3,7;Medium;6,8;6,6;Very High;4,1;Medium;-;-;-;4,6;0,9
+Gambia;GMB;5,7;High;6,9;Very High;2,1;3,9;Medium;7,0;6,9;Very High;4,0;Medium;-;-;-;4,9;1,7
+Georgia;GEO;4,0;Medium;3,1;Medium;6,6;5,3;High;4,2;4,0;Medium;3,9;Medium;-;-;-;4,0;0,1
+Germany;DEU;2,1;Low;2,2;Low;7,8;5,6;High;0,5;0,8;Very Low;1,9;Very Low;-;-;-;2,0;0,2
+Ghana;GHA;4,7;Medium;5,5;High;2,5;3,5;Medium;5,2;5,5;High;4,0;Medium;-;-;-;4,4;0,7
+Greece;GRC;3,3;Low;2,2;Low;7,7;5,6;High;2,5;2,9;Medium;3,0;Low;1,8;2;Low;3,2;0,3
+Grenada;GRD;3,6;Medium;2,7;Medium;4,8;3,7;Medium;5,0;4,8;High;1,8;Very Low;-;-;-;2,7;1,8
+Guatemala;GTM;4,8;Medium;4,6;High;3,6;4,1;High;5,7;5,9;High;5,6;High;2,8;3;Medium;5,2;-0,8
+Guinea;GIN;6,0;High;6,9;Very High;2,9;4,7;High;4,8;6,7;Very High;5,2;High;-;-;-;5,6;0,8
+Guinea-Bissau;GNB;6,2;High;7,0;Very High;2,3;4,7;High;6,8;7,2;Very High;4,8;Medium;-;-;-;5,5;1,4
+Guyana;GUY;3,7;Medium;2,4;Low;4,1;3,9;Medium;5,0;5,2;High;3,3;Low;-;-;-;3,5;0,4
+Haiti;HTI;6,6;Very High;6,8;Very High;3,9;5,6;High;6,8;7,7;Very High;6,4;High;3,3;4;High;6,5;0,2
+Honduras;HND;4,9;Medium;4,3;High;3,3;4,1;High;7,1;6,5;Very High;5,2;High;2,8;3;Medium;5,1;-0,3
+Hungary;HUN;3,4;Low;2,4;Low;7,7;5,4;High;2,9;3,1;Medium;1,9;Very Low;-;-;-;2,7;1,5
+Iceland;ISL;2,6;Low;3,8;Medium;5,7;3,6;Medium;0,8;1,3;Very Low;1,2;Very Low;-;-;-;1,9;1,4
+India;IND;4,6;Medium;4,7;High;4,5;4,5;High;3,8;4,6;High;5,3;High;-;-;-;5,0;-0,7
+Indonesia;IDN;4,4;Medium;4,4;High;4,4;3,9;Medium;4,4;5,1;High;4,7;Medium;2,1;3;Medium;4,6;-0,3
+Iran;IRN;3,7;Medium;3,6;Medium;4,2;3,7;Medium;2,0;3,8;Medium;5,2;High;3,0;3;Medium;4,5;-1,5
+Iraq;IRQ;4,8;Medium;4,2;High;3,1;4,5;High;4,7;6,0;High;6,7;Very High;4,0;4;High;5,8;-1,9
+Ireland;IRL;3,0;Low;3,1;Medium;5,9;3,8;Medium;2,9;2,4;Low;1,4;Very Low;-;-;-;2,2;1,6
+Israel;ISR;2,7;Low;4,1;High;4,6;3,2;Medium;0,5;1,5;Low;2,9;Low;-;-;-;2,8;-0,2
+Italy;ITA;3,1;Low;2,8;Medium;8,2;5,8;High;0,8;1,9;Low;2,6;Low;-;-;-;2,9;0,5
+Jamaica;JAM;4,1;Medium;4,0;Medium;5,2;4,1;High;3,7;4,2;High;3,1;Low;-;-;-;3,6;1,0
+Japan;JPN;2,3;Low;3,2;Medium;8,2;5,7;High;0,0;0,7;Very Low;2,3;Low;-;-;-;2,3;0,0
+Jordan;JOR;4,3;Medium;4,1;High;3,0;4,0;Medium;5,1;4,8;High;4,5;Medium;2,2;3;Medium;4,4;-0,2
+Kazakhstan;KAZ;3,1;Low;2,6;Low;4,2;2,7;Medium;4,0;4,1;High;1,8;Very Low;-;-;-;2,5;1,3
+Kenya;KEN;5,6;High;6,0;High;2,9;4,7;High;5,8;6,3;High;6,1;High;3,1;4;High;5,9;-0,5
+Kiribati;KIR;5,9;High;5,9;High;6,2;5,9;High;6,2;5,9;High;3,6;Medium;-;-;-;4,8;2,3
+Korea DPR;PRK;4,7;Medium;3,9;Medium;4,8;5,4;High;4,4;5,0;High;5,3;High;4,1;5;Very High;5,0;-0,6
+Korea Republic of;KOR;2,9;Low;3,9;Medium;7,1;4,8;High;0,3;1,3;Very Low;2,0;Low;-;-;-;2,5;0,9
+Kuwait;KWT;3,8;Medium;4,9;High;4,3;3,2;Medium;3,5;3,6;Medium;1,8;Very Low;-;-;-;2,8;2,0
+Kyrgyzstan;KGZ;3,8;Medium;3,1;Medium;3,1;3,1;Medium;5,9;5,7;High;3,8;Medium;-;-;-;3,8;0,0
+Lao PDR;LAO;4,6;Medium;4,1;High;3,2;3,6;Medium;7,0;6,6;Very High;4,2;Medium;-;-;-;4,4;0,4
+Latvia;LVA;3,4;Low;2,4;Low;8,1;5,6;High;2,5;2,8;Medium;1,5;Very Low;-;-;-;2,5;1,9
+Lebanon;LBN;5,0;High;4,5;High;5,5;5,4;High;4,6;5,2;High;5,0;High;2,6;3;Medium;5,0;0,0
+Lesotho;LSO;6,0;High;5,5;High;5,6;5,7;High;7,1;6,8;Very High;4,1;Medium;2,1;3;Medium;5,1;1,9
+Liberia;LBR;6,2;High;7,0;Very High;3,2;5,3;High;5,2;6,4;Very High;5,1;High;-;-;-;5,7;1,1
+Libya;LBY;4,3;Medium;3,0;Medium;3,7;3,9;Medium;6,7;6,7;Very High;6,6;Very High;3,8;4;High;5,5;-2,3
+Liechtenstein;LIE;1,9;Very Low;1,9;Low;4,0;2,6;Low;x;1,5;Low;0,9;Very Low;-;-;-;1,4;1,0
+Lithuania;LTU;2,8;Low;2,4;Low;7,6;5,2;High;0,9;1,7;Low;1,3;Very Low;-;-;-;2,1;1,5
+Luxembourg;LUX;3,1;Low;3,8;Medium;6,4;4,2;High;2,5;1,9;Low;0,9;Very Low;-;-;-;2,0;2,2
+Madagascar;MDG;6,1;High;6,9;Very High;2,7;4,6;High;7,5;7,3;Very High;5,2;High;2,1;3;Medium;5,7;0,9
+Malawi;MWI;5,7;High;6,6;Very High;3,1;4,8;High;5,4;6,0;High;4,9;Medium;2,3;3;Medium;5,3;0,8
+Malaysia;MYS;3,2;Low;4,2;High;4,2;3,6;Medium;0,3;2,1;Low;3,1;Low;-;-;-;3,2;0,1
+Maldives;MDV;4,0;Medium;4,8;High;3,0;2,5;Low;5,3;5,2;High;2,4;Low;-;-;-;3,2;1,6
+Mali;MLI;5,7;High;6,0;High;2,5;4,8;High;5,1;6,5;Very High;6,3;High;3,6;4;High;6,0;-0,6
+Malta;MLT;4,1;Medium;4,7;High;7,2;4,9;High;3,3;2,9;Medium;1,8;Very Low;-;-;-;3,0;2,3
+Marshall Islands;MHL;5,4;High;4,7;High;4,7;4,8;High;6,3;7,0;Very High;3,6;Medium;-;-;-;4,5;1,8
+Mauritania;MRT;5,8;High;6,3;High;2,4;4,1;High;7,5;7,4;Very High;5,6;High;2,4;3;Medium;5,7;0,2
+Mauritius;MUS;3,7;Medium;3,0;Medium;7,2;5,0;High;3,2;3,4;Medium;2,1;Low;-;-;-;2,9;1,6
+Mexico;MEX;3,7;Medium;3,3;Medium;5,2;4,2;High;2,0;3,6;Medium;5,1;High;-;-;-;4,4;-1,4
+Micronesia;FSM;5,0;High;3,6;Medium;5,5;5,2;High;7,5;6,5;Very High;3,9;Medium;-;-;-;4,5;1,1
+Moldova Republic of;MDA;4,4;Medium;3,8;Medium;6,6;4,8;High;4,5;4,8;High;2,9;Low;-;-;-;3,7;1,5
+Mongolia;MNG;3,7;Medium;3,8;Medium;3,5;3,3;Medium;3,2;4,1;High;2,7;Low;-;-;-;3,2;1,0
+Montenegro;MNE;3,7;Medium;2,7;Medium;5,9;3,9;Medium;5,2;4,7;High;2,2;Low;-;-;-;3,0;1,5
+Morocco;MAR;4,3;Medium;4,1;High;5,0;4,2;High;3,8;4,5;High;4,0;Medium;-;-;-;4,2;0,3
+Mozambique;MOZ;6,2;High;6,9;Very High;3,5;5,7;High;4,9;6,1;High;6,7;Very High;2,9;3;Medium;6,5;-0,5
+Myanmar;MMR;4,8;Medium;4,3;High;4,4;4,8;High;4,2;5,5;High;6,3;High;3,2;4;High;5,6;-1,5
+Namibia;NAM;5,1;High;5,1;High;3,6;4,4;High;6,4;5,8;High;4,1;Medium;1,9;2;Low;4,6;1,0
+Nauru;NRU;5,2;High;4,9;High;5,1;4,7;High;7,1;6,0;High;3,2;Low;-;-;-;4,2;2,0
+Nepal;NPL;5,1;High;5,1;High;3,4;4,1;High;6,4;6,4;Very High;5,3;High;-;-;-;5,2;-0,2
+Netherlands;NLD;2,4;Low;3,5;Medium;6,6;4,5;High;0,6;0,9;Very Low;1,4;Very Low;-;-;-;1,9;1,0
+New Zealand;NZL;2,1;Low;3,1;Medium;5,1;3,2;Medium;0,5;1,0;Very Low;1,6;Very Low;-;-;-;1,9;0,5
+Nicaragua;NIC;4,6;Medium;4,3;High;4,2;4,0;Medium;5,1;5,6;High;4,6;Medium;-;-;-;4,6;0,0
+Niger;NER;6,2;High;7,1;Very High;2,9;5,3;High;5,3;6,3;High;7,4;Very High;3,2;4;High;6,8;-1,2
+Nigeria;NGA;5,9;High;6,5;Very High;2,7;4,4;High;4,9;7,2;Very High;6,6;Very High;3,8;4;High;6,3;-0,7
+North Macedonia;MKD;3,7;Medium;2,5;Low;6,4;4,5;High;4,4;4,4;High;2,4;Low;-;-;-;3,1;1,3
+Norway;NOR;1,9;Very Low;2,0;Low;6,1;4,1;High;0,4;0,8;Very Low;0,9;Very Low;-;-;-;1,4;1,0
+Oman;OMN;3,0;Low;5,0;High;3,0;2,2;Low;1,3;2,4;Low;2,5;Low;-;-;-;2,8;0,5
+Pakistan;PAK;5,3;High;5,3;High;3,4;4,4;High;6,2;6,4;Very High;6,1;High;3,4;4;High;5,7;-0,8
+Palau;PLW;3,9;Medium;3,5;Medium;3,7;3,3;Medium;5,8;5,2;High;2,5;Low;-;-;-;3,2;1,4
+Palestine;PSE;5,0;High;5,1;High;2,9;4,1;High;7,5;6,0;High;5,2;High;3,4;4;High;5,1;-0,2
+Panama;PAN;3,7;Medium;3,6;Medium;4,2;3,4;Medium;4,0;4,3;High;3,5;Medium;-;-;-;3,6;0,2
+Papua New Guinea;PNG;5,7;High;5,6;High;4,2;4,8;High;7,0;6,8;Very High;5,7;High;-;-;-;5,7;0,0
+Paraguay;PRY;3,6;Medium;2,5;Low;3,7;3,4;Medium;5,7;5,7;High;3,1;Low;-;-;-;3,4;0,5
+Peru;PER;4,3;Medium;4,0;Medium;3,8;3,8;Medium;4,8;5,1;High;4,7;Medium;2,3;3;Medium;4,5;-0,4
+Philippines;PHL;4,7;Medium;4,5;High;4,3;4,1;High;5,0;5,5;High;5,5;High;2,5;3;Medium;5,1;-0,8
+Poland;POL;3,1;Low;2,0;Low;7,6;5,2;High;2,5;2,8;Medium;1,7;Very Low;-;-;-;2,4;1,4
+Portugal;PRT;2,8;Low;2,2;Low;8,1;5,6;High;1,2;1,7;Low;1,6;Very Low;-;-;-;2,2;1,2
+Qatar;QAT;3,3;Low;5,0;High;3,4;2,3;Low;3,2;3,2;Medium;1,3;Very Low;-;-;-;2,3;2,0
+Romania;ROU;3,7;Medium;2,4;Low;7,9;5,6;High;2,7;3,7;Medium;2,6;Low;-;-;-;3,2;1,1
+Russian Federation;RUS;3,2;Low;2,3;Low;6,7;4,8;High;1,3;3,0;Medium;4,0;Medium;-;-;-;3,6;-0,8
+Rwanda;RWA;5,0;High;5,9;High;2,2;4,6;High;4,2;4,6;High;4,3;Medium;-;-;-;4,7;0,7
+Saint Kitts and Nevis;KNA;3,3;Low;2,9;Medium;3,9;2,9;Medium;5,1;4,3;High;1,9;Very Low;-;-;-;2,6;1,4
+Saint Lucia;LCA;3,9;Medium;2,5;Low;6,2;4,8;High;4,5;4,8;High;2,3;Low;-;-;-;3,1;1,6
+Saint Vincent and the Grenadines;VCT;4,1;Medium;3,8;Medium;5,6;3,9;Medium;5,3;4,8;High;2,0;Low;-;-;-;3,1;2,1
+Samoa;WSM;3,3;Low;1,8;Low;3,7;3,8;Medium;5,1;5,2;High;3,0;Low;-;-;-;3,2;0,3
+Sao Tome and Principe;STP;5,1;High;6,4;Very High;2,2;3,4;Medium;6,8;6,2;High;2,4;Low;-;-;-;3,8;2,7
+Saudi Arabia;SAU;2,8;Low;3,1;Medium;3,2;2,3;Low;2,8;3,0;Medium;2,6;Low;-;-;-;2,7;0,2
+Senegal;SEN;5,1;High;6,1;High;2,1;3,9;Medium;5,3;5,6;High;4,6;Medium;1,8;2;Low;4,9;0,5
+Serbia;SRB;3,7;Medium;2,3;Low;7,3;5,2;High;4,1;4,1;High;3,0;Low;-;-;-;3,4;0,7
+Seychelles;SYC;4,0;Medium;3,8;Medium;5,3;3,9;Medium;5,1;4,4;High;2,0;Low;-;-;-;3,0;2,0
+Sierra Leone;SLE;6,1;High;7,1;Very High;2,8;4,8;High;5,6;6,7;Very High;5,2;High;-;-;-;5,7;0,9
+Singapore;SGP;2,4;Low;4,0;Medium;5,8;3,9;Medium;0,5;0,9;Very Low;0,5;Very Low;-;-;-;1,5;1,9
+Slovakia;SVK;3,3;Low;2,5;Low;7,4;5,0;High;2,8;3,0;Medium;1,6;Very Low;-;-;-;2,5;1,7
+Slovenia;SVN;2,7;Low;2,0;Low;7,8;5,2;High;0,9;1,8;Low;1,2;Very Low;-;-;-;2,0;1,5
+Solomon Islands;SLB;5,6;High;5,7;High;3,3;4,6;High;7,1;6,6;Very High;4,5;Medium;-;-;-;5,1;1,1
+Somalia;SOM;7,3;Very High;6,9;Very High;2,6;6,6;Very High;7,2;8,5;Very High;9,0;Very High;4,5;5;Very High;8,2;-1,7
+South Africa;ZAF;4,7;Medium;4,1;High;5,5;5,4;High;4,2;4,7;High;4,7;Medium;-;-;-;4,7;0,0
+South Sudan;SSD;7,3;Very High;7,3;Very High;2,7;6,2;High;6,8;8,6;Very High;8,0;Very High;4,0;4;High;7,7;-0,7
+Spain;ESP;2,8;Low;2,5;Low;7,7;5,4;High;0,8;1,6;Low;2,1;Low;-;-;-;2,5;0,7
+Sri Lanka;LKA;4,3;Medium;3,4;Medium;5,5;4,5;High;5,2;5,1;High;3,8;Medium;-;-;-;4,1;0,5
+Sudan;SDN;5,8;High;6,8;Very High;3,2;4,9;High;4,3;6,0;High;6,8;Very High;4,6;5;Very High;6,3;-1,0
+Suriname;SUR;3,5;Medium;2,5;Low;4,3;3,7;Medium;3,9;4,8;High;3,2;Low;-;-;-;3,4;0,3
+Sweden;SWE;2,2;Low;2,8;Medium;6,4;4,6;High;0,4;0,8;Very Low;1,4;Very Low;-;-;-;1,8;0,8
+Switzerland;CHE;1,9;Very Low;3,7;Medium;4,3;3,1;Medium;0,0;0,6;Very Low;1,4;Very Low;-;-;-;1,7;0,5
+Syria;SYR;4,7;Medium;2,9;Medium;3,1;5,6;High;5,0;6,5;Very High;7,2;Very High;4,8;5;Very High;6,0;-2,5
+Tajikistan;TJK;4,3;Medium;4,3;High;2,2;3,2;Medium;5,9;5,9;High;4,5;Medium;-;-;-;4,4;-0,2
+Tanzania;TZA;5,6;High;6,4;Very High;2,4;4,6;High;5,2;5,9;High;5,2;High;1,4;2;Low;5,4;0,4
+Thailand;THA;3,8;Medium;3,2;Medium;6,3;4,7;High;2,3;3,7;Medium;4,1;Medium;1,7;2;Low;4,0;-0,3
+Timor-Leste;TLS;5,5;High;5,6;High;3,2;4,6;High;6,6;6,4;Very High;4,2;Medium;-;-;-;4,9;1,3
+Togo;TGO;5,9;High;6,8;Very High;3,2;4,3;High;7,2;6,9;Very High;4,6;Medium;-;-;-;5,3;1,3
+Tonga;TON;4,0;Medium;2,7;Medium;4,3;4,3;High;5,9;5,5;High;3,9;Medium;-;-;-;4,0;0,1
+Trinidad and Tobago;TTO;3,8;Medium;2,6;Low;6,3;4,5;High;5,1;4,6;High;2,5;Low;1,4;2;Low;3,2;1,3
+Tunisia;TUN;3,7;Medium;3,3;Medium;4,9;3,5;Medium;4,2;4,5;High;3,1;Low;-;-;-;3,4;0,6
+Turkey;TUR;3,9;Medium;3,4;Medium;5,4;4,6;High;2,6;3,7;Medium;5,1;High;2,6;3;Medium;4,5;-1,2
+Turkmenistan;TKM;3,3;Low;3,1;Medium;3,2;2,4;Low;4,2;4,9;High;2,4;Low;-;-;-;2,9;0,9
+Tuvalu;TUV;5,1;High;4,8;High;4,6;4,8;High;6,1;5,8;High;3,1;Low;-;-;-;4,1;2,0
+Uganda;UGA;6,1;High;7,1;Very High;2,6;5,3;High;5,0;5,9;High;6,5;Very High;2,8;3;Medium;6,3;-0,4
+Ukraine;UKR;4,0;Medium;2,4;Low;7,2;5,4;High;5,0;5,1;High;4,6;Medium;3,3;4;High;4,3;-0,6
+United Arab Emirates;ARE;2,4;Low;4,4;High;3,4;2,4;Low;0,3;1,3;Very Low;1,8;Very Low;-;-;-;2,1;0,6
+United Kingdom;GBR;2,6;Low;3,2;Medium;6,5;4,5;High;0,4;1,2;Very Low;2,2;Low;-;-;-;2,4;0,4
+United States of America;USA;2,5;Low;2,8;Medium;6,1;4,3;High;0,5;1,3;Very Low;3,3;Low;-;-;-;2,9;-0,8
+Uruguay;URY;3,2;Low;2,9;Medium;5,2;3,7;Medium;3,3;3,0;Medium;1,7;Very Low;-;-;-;2,5;1,5
+Uzbekistan;UZB;4,1;Medium;3,5;Medium;3,4;3,2;Medium;6,6;6,0;High;3,1;Low;-;-;-;3,6;1,0
+Vanuatu;VUT;5,2;High;4,7;High;3,4;4,8;High;7,1;6,4;Very High;4,1;Medium;-;-;-;4,7;1,1
+Venezuela;VEN;4,4;Medium;3,2;Medium;4,4;4,2;High;5,4;6,4;Very High;4,3;Medium;4,0;4;High;4,4;0,1
+Viet Nam;VNM;3,8;Medium;3,7;Medium;4,6;3,6;Medium;3,2;4,2;High;3,7;Medium;-;-;-;3,8;0,1
+Yemen;YEM;6,4;High;6,3;High;3,1;5,8;High;6,2;7,2;Very High;8,0;Very High;4,5;5;Very High;7,2;-1,6
+Zambia;ZMB;6,1;High;6,9;Very High;2,7;5,0;High;7,2;6,7;Very High;4,4;Medium;2,3;3;Medium;5,3;1,7
+Zimbabwe;ZWE;5,3;High;4,8;High;4,0;5,3;High;4,8;6,0;High;5,2;High;3,4;4;High;5,3;0,1

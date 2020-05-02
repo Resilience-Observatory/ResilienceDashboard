@@ -30,27 +30,33 @@ from app import app
 #Load data
 keywords = pd.read_csv('data/CoronaMadrid_keywords_ordered_currentflowbetweenness_7_nonfiltered.csv')
 kw_params = ['freq','cfbetweenness','eigenvalue']
-spain_communities_geojson_path = 'spain-communities.geojson'
-spain_communities_geojson_url = 'https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/spain-communities.geojson'
-if not os.path.exists(spain_communities_geojson_path):
-    urlretrieve(spain_communities_geojson_url, spain_communities_geojson_path)
-spain_communities_geojson = gpd.read_file(spain_communities_geojson_path)
-js = json.loads(spain_communities_geojson.to_json())
-poverty_risk = pd.read_csv('data/poverty_risk.tsv', sep='\t')
-eu_country_codes = poverty_risk.iloc[:,0].apply(lambda x: x[-2:]).unique()
+#spain_communities_geojson_path = 'spain-communities.geojson'
+#spain_communities_geojson_url = 'https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/spain-communities.geojson'
+#if not os.path.exists(spain_communities_geojson_path):
+#    urlretrieve(spain_communities_geojson_url, spain_communities_geojson_path)
+#spain_communities_geojson = gpd.read_file(spain_communities_geojson_path)
+#js = json.loads(spain_communities_geojson.to_json())
+#poverty_risk = pd.read_csv('data/poverty_risk.tsv', sep='\t')
+#eu_country_codes = poverty_risk.iloc[:,0].apply(lambda x: x[-2:]).unique()
+inform_covid = pd.read_csv('data/inform-covid-analysis-v01_page3-unix.csv', sep=';')
 
-def get_country_name(cc):
-    try:
-        return CC[cc]
-    except:
-        pass
-eu_countries = []
-for cc in eu_country_codes:
-    country_name = get_country_name(cc)
-    if country_name is not None:
-        eu_countries.append(country_name)
-fig_eu = px.choropleth(locationmode='country names', locations=eu_countries, color=[i for i in range(len(eu_countries))], scope='europe')
+#def get_country_name(cc):
+#    try:
+#        return CC[cc]
+#    except:
+#        pass
+#eu_countries = []
+#for cc in eu_country_codes:
+#    country_name = get_country_name(cc)
+#    if country_name is not None:
+#        eu_countries.append(country_name)
+fig_eu = px.choropleth(locationmode='country names',
+                       locations=inform_covid['Country'],
+                       color_continuous_scale='Greens',
+                       color=inform_covid['INFORM COVID-19 RISK'].apply(lambda x: float(x.replace(',','.'))),
+                       scope='europe')
 fig_eu.update_layout(
+    legend_title='COVID-19 risk index',
     height=500,
     margin=dict(r=0, l=0, t=0, b=0)
 )
@@ -59,7 +65,7 @@ countries = fig_eu.data[0]
 #Preload graph
 with open('data/PostsCorMadNet7_c.cnf', 'rb') as f:
     Gu2 = pickle.load(f)
-N = Gu2.number_of_nodes() 
+N = Gu2.number_of_nodes()
 V = Gu2.number_of_edges()
 
 labels=[]
@@ -103,7 +109,7 @@ pio.templates.default = 'plotly_white'
 layout = html.Div(className = '', children = [
     html.Div(className = 'box', children = [
         html.Div(className = 'columns', children = [
-            
+
         ]),
         html.Div(className = 'columns', children = [
             html.Div(className = 'column is-narrow', children = [
@@ -171,7 +177,7 @@ layout = html.Div(className = '', children = [
                 html.Div(id='hot-topics', className='box')
             ])
         ])
-        
+
     ])
 ])
 
@@ -188,7 +194,7 @@ def gen_random_graph(n_clicks) :
         y=Yed,
         mode='lines',
         line=dict(
-            color=colors[2], 
+            color=colors[2],
             width=1
         ),
         opacity=0.5,
@@ -203,7 +209,7 @@ def gen_random_graph(n_clicks) :
             size=freqs,
             color=colors[0],
             line=dict(
-                color='black', 
+                color='black',
                 width=0.5
             ),
             opacity=0.9
@@ -246,7 +252,7 @@ def gen_random_graph(n_clicks) :
               [Input(component_id = 'param-selector',component_property = 'value'),
               Input(component_id = 'axis-type',component_property = 'value')])
 def gen_random_graph(selected_param,axis_type) :
-    
+
     #Sort values
     kws_df = keywords.sort_values(selected_param,ascending=False).iloc[0:15]
 
@@ -260,7 +266,7 @@ def gen_random_graph(selected_param,axis_type) :
             name=unique_kw
         ))
 
-    
+
 
     fig.update_layout(
         height=450,
