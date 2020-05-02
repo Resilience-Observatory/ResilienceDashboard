@@ -118,7 +118,13 @@ layout = html.Div(className = '', children = [
                     hoverData={'points': [{'location': 'Select a country on the map'}]}
                 )
             ]),
-            html.Img(id = 'logo', className = 'column is-one-third', src='/assets/logo.png'),
+            html.A(className = 'column is-one-third', children = [
+                    html.Img(id = 'logo', src='/assets/logo.png'),
+                ], 
+                href='https://readymag.com/u1187351608/1830554/', 
+                target='_blank'
+            )
+            
         ]),
         html.Div(className = 'column is-narrow', children = [
             html.H1('Twitter posts analysis',className = 'title is-2'),
