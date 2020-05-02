@@ -40,10 +40,10 @@ app.index_string = '''
 
           <div class="navbar-brand">
 
-            <a class="navbar-item" href="/">
-                <img class="logo1" src="/assets/logo.png" alt="Resilience Observatory" width="75" height="100">
+            <a class="navbar-item" href="https://readymag.com/u1187351608/1830554/">
+                <img class="logo1" src="/assets/logo.png" alt="Resilience Observatory" width="75" height="50">
             </a>
-            
+
             <div class="navbar-burger burger" data-target="navMenu">
               <span></span>
               <span></span>
