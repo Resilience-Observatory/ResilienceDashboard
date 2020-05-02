@@ -23,11 +23,31 @@ from app import app
 keywords = pd.read_csv('data/CoronaMadrid_keywords_ordered_currentflowbetweenness_7_nonfiltered.csv')
 kw_params = ['freq','cfbetweenness','eigenvalue']
 
+#Preload graph
 with open('data/PostsCorMadNet7_c.cnf', 'rb') as f:
     Gu2 = pickle.load(f)
 N = Gu2.number_of_nodes() 
 V = Gu2.number_of_edges()
 
+labels=[]
+for node in Gu2.nodes.data():
+    #Generamos la etiqueta
+    label = node[0]+' #freq:'+str(node[1]['freq']/20)
+    #Añadir al array
+    labels.append(label)
+
+pos=nx.spring_layout(Gu2)
+
+Xv=[pos[k][0] for k in Gu2.nodes()]
+Yv=[pos[k][1] for k in Gu2.nodes()]
+Xed,Yed=[],[]
+for edge in Gu2.edges():
+    Xed+=[pos[edge[0]][0],pos[edge[1]][0], None]
+    Yed+=[pos[edge[0]][1],pos[edge[1]][1], None]
+
+freqs = []
+for freq in Gu2.nodes.data('freq'):
+    freqs.append(freq[1]/20) #Necesario normalizar de alguna forma
 
 #Available colors
 colors = [
@@ -118,27 +138,6 @@ layout = html.Div(className = '', children = [
 @app.callback(Output(component_id = 'posts-net-graph',component_property = 'children'),
               [Input(component_id = 'update-button',component_property = 'n_clicks')])
 def gen_random_graph(n_clicks) :
-    labels=[]
-    for node in Gu2.nodes.data():
-        #Generamos la etiqueta
-        label = node[0]+' #freq:'+str(node[1]['freq'])
-        #Añadir al array
-        labels.append(label)
-
-    freqs = []
-    for freq in Gu2.nodes.data('freq'):
-        freqs.append(freq[1]/20) #Necesario normalizar de alguna forma
-
-    pos=nx.spring_layout(Gu2)
-
-    Xv=[pos[k][0] for k in Gu2.nodes()]
-    Yv=[pos[k][1] for k in Gu2.nodes()]
-    Xed=[]
-    Yed=[]
-    for edge in Gu2.edges():
-        Xed+=[pos[edge[0]][0],pos[edge[1]][0], None]
-        Yed+=[pos[edge[0]][1],pos[edge[1]][1], None]
-
     trace3=go.Scatter(x=Xed,
         y=Yed,
         mode='lines',
@@ -157,29 +156,22 @@ def gen_random_graph(n_clicks) :
         text=labels,
         hoverinfo='text'
     )
-
-    axis = {
-        "backgroundcolor": "#E5ECF6",
-        "gridcolor": "white",
-        "gridwidth": 2,
-        "linecolor": "white",
-        "showbackground": True,
-        "ticks": "",
-        "zerolinecolor": "white"
-    }
-    
     layout2d = go.Layout(
         title="",
         height=600,
         showlegend=False,
-        scene=dict(
-            xaxis=dict(axis),
-            yaxis=dict(axis),
-            zaxis=dict(axis),
-        ),
-        margin=dict(
-            t=0
-        )
+        margin=dict(r=0, l=0, t=0, b=0),
+        xaxis = {
+            'showgrid':False,
+            'visible':False
+        },
+        yaxis = {
+            'showgrid':False,
+            'showline':False,
+            'zeroline':False,
+            'autorange':'reversed',
+            'visible':False
+        }
     )
 
 
