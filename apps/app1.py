@@ -6,12 +6,20 @@ import dash_table
 from dash.dependencies import Input, Output
 
 import pandas as pd
+import geopandas as gpd
 import json
+import os
 
 import plotly.graph_objects as go
+import plotly.express as px
 import plotly.io as pio
 
+
+from data.iso_country_codes import CC
+from urllib.request import urlretrieve
+
 import math
+import random
 
 import pickle
 
@@ -22,6 +30,31 @@ from app import app
 #Load data
 keywords = pd.read_csv('data/CoronaMadrid_keywords_ordered_currentflowbetweenness_7_nonfiltered.csv')
 kw_params = ['freq','cfbetweenness','eigenvalue']
+spain_communities_geojson_path = 'spain-communities.geojson'
+spain_communities_geojson_url = 'https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/spain-communities.geojson'
+if not os.path.exists(spain_communities_geojson_path):
+    urlretrieve(spain_communities_geojson_url, spain_communities_geojson_path)
+spain_communities_geojson = gpd.read_file(spain_communities_geojson_path)
+js = json.loads(spain_communities_geojson.to_json())
+poverty_risk = pd.read_csv('data/poverty_risk.tsv', sep='\t')
+eu_country_codes = poverty_risk.iloc[:,0].apply(lambda x: x[-2:]).unique()
+
+def get_country_name(cc):
+    try:
+        return CC[cc]
+    except:
+        pass
+eu_countries = []
+for cc in eu_country_codes:
+    country_name = get_country_name(cc)
+    if country_name is not None:
+        eu_countries.append(country_name)
+fig_eu = px.choropleth(locationmode='country names', locations=eu_countries, color=[i for i in range(len(eu_countries))], scope='europe')
+fig_eu.update_layout(
+    height=500,
+    margin=dict(r=0, l=0, t=0, b=0)
+)
+countries = fig_eu.data[0]
 
 #Preload graph
 with open('data/PostsCorMadNet7_c.cnf', 'rb') as f:
@@ -70,6 +103,9 @@ pio.templates.default = 'plotly_white'
 layout = html.Div(className = '', children = [
     html.Div(className = 'box', children = [
         html.Div(className = 'columns', children = [
+            
+        ]),
+        html.Div(className = 'columns', children = [
             html.Div(className = 'column is-narrow', children = [
                 html.H1('Twitter posts analysis',className = 'title is-2'),
             ]),
@@ -79,12 +115,19 @@ layout = html.Div(className = '', children = [
         ]),
         html.Div(className = 'columns', children = [
             html.Div(className = 'column', children = [
-                html.Div(className = 'colums', children = [
+                html.Div(className = 'columns', children = [
+                    html.Div(className = 'column is-one-third', children = [
+                        html.H1('Europe countries',className = 'title is-5'),
+                        dcc.Graph(
+                            id = 'graph-eu',
+                            figure = fig_eu
+                        )
+                    ]),
                     html.Div(className = 'column is-two-thirds', children = [
                         html.H1('Posts network graph',className = 'title is-5'),
+                        html.Div(id='posts-net-graph', className='box')
                     ])
-                ]),
-                html.Div(id='posts-net-graph', className='box')
+                ])
             ]),
             html.Div(className = 'column is-one-third', children = [
                 html.Div(className = 'columns', children = [
@@ -131,6 +174,9 @@ layout = html.Div(className = '', children = [
         
     ])
 ])
+
+# FUNCTIONS
+
 
 # CALLBACKS
 
