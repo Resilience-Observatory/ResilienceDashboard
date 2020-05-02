@@ -50,6 +50,7 @@ data = [dict(
 
 layout = dict(
         title = '',
+        height = 350,
         geo = dict(
             scope='europe',
             showlakes = True,
@@ -63,7 +64,7 @@ fig_eu = go.FigureWidget(data=data, layout=layout)
 
 
 #Preload graph
-with open('data/PostsCorMadNet7_c.cnf', 'rb') as f:
+with open('data/PostsCorMadNet7_viz.cnf', 'rb') as f:
     Gu2 = pickle.load(f)
 N = Gu2.number_of_nodes()
 V = Gu2.number_of_edges()
@@ -109,6 +110,7 @@ pio.templates.default = 'plotly_white'
 layout = html.Div(className = '', children = [
     html.Div(className = 'box', children = [
         html.Div(className = 'columns', children = [
+            html.Div(id = 'selected-country', className = 'column is-one-third'),
             html.Div(className = 'column is-one-third', children = [
                 dcc.Graph(
                     id = 'graph-eu',
@@ -116,7 +118,7 @@ layout = html.Div(className = '', children = [
                     hoverData={'points': [{'location': 'Select a country on the map'}]}
                 )
             ]),
-            html.Div(id = 'selected-country', className = 'column is-two-thirds'),
+            html.Img(id = 'logo', className = 'column is-one-third', src='/assets/logo.png'),
         ]),
         html.Div(className = 'column is-narrow', children = [
             html.H1('Twitter posts analysis',className = 'title is-2'),

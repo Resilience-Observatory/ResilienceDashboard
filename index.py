@@ -19,15 +19,12 @@ app.index_string = '''
         <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet'>
             <style>
                 .logo1 {
-                    color : white;
+                    color : black;
                     font-family: 'Megrim';
                     font-size: 30px;
                 }
                 .navlogo {
-                    background: linear-gradient(to left, #009999, #white);
-                }
-                .navbar {
-                    height : 5rem
+                    background: linear-gradient(to left, #2E8B57, white);
                 }
             </style>
         {%favicon%}
@@ -36,13 +33,18 @@ app.index_string = '''
 
     <body class="body">
 
-        <nav class="navbar is-spaced navlogo" role="navigation" aria-label="main navigation">
+        <nav class="navbar navlogo" role="navigation" aria-label="main navigation">
 
           <div class="navbar-brand">
-
-            <a class="navbar-item" href="https://readymag.com/u1187351608/1830554/">
-                <img class="logo1" src="/assets/logo.png" alt="Resilience Observatory" width="75" height="50">
-            </a>
+            <div class="navbar-brand">
+            <a class="navbar-item logo1" href="https://readymag.com/u1187351608/1830554/" target="_blank">RESILIENCE OBSERVATORY</a>
+            <div class="navbar-burger burger" data-target="navMenu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+            
 
             <div class="navbar-burger burger" data-target="navMenu">
               <span></span>
