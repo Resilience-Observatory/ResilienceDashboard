@@ -13,9 +13,21 @@ import plotly.io as pio
 
 import math
 
+import pickle
+
 import networkx as nx
 
 from app import app
+
+#Load data
+keywords = pd.read_csv('data/CoronaMadrid_keywords_ordered_currentflowbetweenness_7_nonfiltered.csv')
+kw_params = ['freq','cfbetweenness','eigenvalue']
+
+with open('data/PostsCorMadNet7_c.cnf', 'rb') as f:
+    Gu2 = pickle.load(f)
+N = Gu2.number_of_nodes() 
+V = Gu2.number_of_edges()
+
 
 #Available colors
 colors = [
@@ -39,102 +51,182 @@ layout = html.Div(className = '', children = [
     html.Div(className = 'box', children = [
         html.Div(className = 'columns', children = [
             html.Div(className = 'column is-narrow', children = [
-                html.H1('Random generated graph visualization',className = 'title is-4'),
+                html.H1('Twitter posts analysis',className = 'title is-2'),
             ]),
             html.Div(className = 'column is-narrow', children = [
                 html.Button('New graph',className='button', id='update-button')
             ])
         ]),
-        html.Div(id='random-graph', className='box')
+        html.Div(className = 'columns', children = [
+            html.Div(className = 'column', children = [
+                html.Div(className = 'colums', children = [
+                    html.Div(className = 'column', children = [
+                        html.H1('Posts network graph',className = 'title is-4'),
+                    ])
+                ]),
+                html.Div(id='posts-net-graph', className='box')
+            ]),
+            html.Div(className = 'column is-one-third', children = [
+                html.Div(className = 'columns', children = [
+                    html.Div(className = 'column is-one-third', children = [
+                        html.H1('Hot topics',className = 'title is-4')
+                    ]),
+                    html.Div(className = 'column is-narrow', children = [
+                        html.Label(
+                            [
+                                "Order parameter",
+                                dcc.Dropdown(
+                                    id="param-selector",
+                                    options=[{"label": i, "value": i} for i in kw_params],
+                                    placeholder='Select hot topics order param',
+                                    value=kw_params[1],
+                                    searchable=True,
+                                    multi=False,
+                                    style=dict(
+                                        width = 300
+                                    )
+                                )
+                            ]
+                        )
+                    ]),
+                    html.Div(className = 'column', children = [
+                        html.Label(
+                            [
+                                "Axis type",
+                                dcc.Dropdown(
+                                    id="axis-type",
+                                    options=[{"label": i, "value": i} for i in ['linear','log']],
+                                    placeholder='Select axis type',
+                                    value='log',
+                                    searchable=True,
+                                    multi=False
+                                )
+                            ]
+                        )
+                    ])
+                ]),
+                html.Div(id='hot-topics', className='box')
+            ])
+        ])
+        
     ])
 ])
 
 # CALLBACKS
 
-# CALLBACK 1 - Random Graph Generation
-@app.callback(Output(component_id = 'random-graph',component_property = 'children'),
+# CALLBACK 1 - Posts Network Graph Generation
+@app.callback(Output(component_id = 'posts-net-graph',component_property = 'children'),
               [Input(component_id = 'update-button',component_property = 'n_clicks')])
 def gen_random_graph(n_clicks) :
-    #Randomw graph gen
-    G = nx.random_geometric_graph(200, 0.125)
+    labels=[]
+    for node in Gu2.nodes.data():
+        #Generamos la etiqueta
+        label = node[0]+' #freq:'+str(node[1]['freq'])
+        #Añadir al array
+        labels.append(label)
 
-    #Edges creation
-    edge_x = []
-    edge_y = []
-    for edge in G.edges():
-        x0, y0 = G.nodes[edge[0]]['pos']
-        x1, y1 = G.nodes[edge[1]]['pos']
-        edge_x.append(x0)
-        edge_x.append(x1)
-        edge_x.append(None)
-        edge_y.append(y0)
-        edge_y.append(y1)
-        edge_y.append(None)
+    freqs = []
+    for freq in Gu2.nodes.data('freq'):
+        freqs.append(freq[1]/20) #Necesario normalizar de alguna forma
 
-    edge_trace = go.Scatter(
-        x=edge_x, y=edge_y,
-        line=dict(width=0.5, color='#888'),
-        hoverinfo='none',
-        mode='lines')
+    pos=nx.spring_layout(Gu2)
 
-    node_x = []
-    node_y = []
-    for node in G.nodes():
-        x, y = G.nodes[node]['pos']
-        node_x.append(x)
-        node_y.append(y)
+    Xv=[pos[k][0] for k in Gu2.nodes()]
+    Yv=[pos[k][1] for k in Gu2.nodes()]
+    Xed=[]
+    Yed=[]
+    for edge in Gu2.edges():
+        Xed+=[pos[edge[0]][0],pos[edge[1]][0], None]
+        Yed+=[pos[edge[0]][1],pos[edge[1]][1], None]
 
-    node_trace = go.Scatter(
-        x=node_x, y=node_y,
+    trace3=go.Scatter(x=Xed,
+        y=Yed,
+        mode='lines',
+        line=dict(color='rgb(210,210,210)', width=1),
+        hoverinfo='none'
+    )
+    trace4=go.Scatter(x=Xv,
+        y=Yv,
         mode='markers',
-        hoverinfo='text',
-        marker=dict(
-            showscale=True,
-            # colorscale options
-            #'Greys' | 'YlGnBu' | 'Greens' | 'YlOrRd' | 'Bluered' | 'RdBu' |
-            #'Reds' | 'Blues' | 'Picnic' | 'Rainbow' | 'Portland' | 'Jet' |
-            #'Hot' | 'Blackbody' | 'Earth' | 'Electric' | 'Viridis' |
-            colorscale='YlGnBu',
-            reversescale=True,
-            color=[],
-            size=10,
-            colorbar=dict(
-                thickness=15,
-                title='Node Connections',
-                xanchor='left',
-                titleside='right'
-            ),
-        line_width=2
-    ))
+        name='net',
+        marker=dict(symbol='circle-dot',
+                        size=freqs,
+                        color='#6959CD',
+                        line=dict(color='rgb(50,50,50)', width=0.5)
+                        ),
+        text=labels,
+        hoverinfo='text'
+    )
 
-    #Color node points
-    node_adjacencies = []
-    node_text = []
-    for node, adjacencies in enumerate(G.adjacency()):
-        node_adjacencies.append(len(adjacencies[1]))
-        node_text.append('# of connections: '+str(len(adjacencies[1])))
-
-    node_trace.marker.color = node_adjacencies
-    node_trace.text = node_text
+    axis = {
+        "backgroundcolor": "#E5ECF6",
+        "gridcolor": "white",
+        "gridwidth": 2,
+        "linecolor": "white",
+        "showbackground": True,
+        "ticks": "",
+        "zerolinecolor": "white"
+    }
     
-    #Create nodes graph
-    fig = go.Figure(
-            data=[edge_trace, node_trace],
-            layout=go.Layout(
-                title='<b>Network graph',
-                height=600,
-                titlefont_size=16,
-                showlegend=False,
-                hovermode='closest',
-                margin=dict(b=20,l=5,r=5,t=40),
-                xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-                yaxis=dict(showgrid=False, zeroline=False, showticklabels=False))
+    layout2d = go.Layout(
+        title="",
+        height=600,
+        showlegend=False,
+        scene=dict(
+            xaxis=dict(axis),
+            yaxis=dict(axis),
+            zaxis=dict(axis),
+        ),
+        margin=dict(
+            t=0
+        )
     )
 
 
+    data1=[trace3, trace4]
+    fig1=go.Figure(data=data1, layout=layout2d)
+
     return [
         dcc.Graph(
-            id = 'graph',
+            id = 'graph-1',
+            figure = fig1
+        )
+    ]
+
+
+# CALLBACK 2 - Hot topics barchart
+@app.callback(Output(component_id = 'hot-topics',component_property = 'children'),
+              [Input(component_id = 'param-selector',component_property = 'value'),
+              Input(component_id = 'axis-type',component_property = 'value')])
+def gen_random_graph(selected_param,axis_type) :
+    
+    #Sort values
+    kws_df = keywords.sort_values(selected_param,ascending=False).iloc[0:15]
+
+    unique_kws = kws_df.word.unique().tolist()
+
+    fig = go.Figure()
+    for unique_kw in unique_kws :
+        kw_df = kws_df[kws_df.word == unique_kw]
+        fig.add_trace(go.Bar(x=[unique_kw],
+            y=[kw_df[selected_param].iloc[0]],
+            name=unique_kw
+        ))
+
+    
+
+    fig.update_layout(
+        height=570,
+        margin=dict(r=0, l=0, t=0, b=0),
+        yaxis=dict(
+            title=selected_param,
+            type=axis_type
+        )
+    )
+
+    return [
+        dcc.Graph(
+            id = 'graph-2',
             figure = fig
         )
     ]

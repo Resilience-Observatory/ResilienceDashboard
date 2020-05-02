@@ -4,6 +4,7 @@ from dash.dependencies import Input, Output
 
 from app import app
 from apps import app_credits, app1
+import os
 
 #APP INDEX STRING
 app.index_string = '''
@@ -23,7 +24,7 @@ app.index_string = '''
                     font-size: 30px;
                 }
                 .navlogo {
-                    background: linear-gradient(to left, #009999, #006666);
+                    background: linear-gradient(to left, #009999, #white);
                 }
             </style>
         {%favicon%}
@@ -32,10 +33,14 @@ app.index_string = '''
 
     <body class="body">
 
-        <nav class="navbar navlogo" role="navigation" aria-label="main navigation">
+        <nav class="navbar is-spaced navlogo" role="navigation" aria-label="main navigation">
 
           <div class="navbar-brand">
-            <a class="navbar-item logo1" href="/">RESILIENCE OBSERVATORY</a>
+
+            <a class="navbar-item" href="/">
+                <img class="logo1" src="/assets/logo.png" alt="Resilience Observatory" width="75" height="50">
+            </a>
+            
             <div class="navbar-burger burger" data-target="navMenu">
               <span></span>
               <span></span>
