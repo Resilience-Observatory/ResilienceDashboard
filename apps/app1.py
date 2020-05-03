@@ -141,7 +141,12 @@ layout = html.Div(className = '', children = [
                         )
                     ]),
                 ]),
-                html.Div(id='posts-net-graph', className='box')
+                html.Div(id='posts-net-graph', className='box', children = [
+                    dcc.Graph(
+                        id = 'graph-1',
+                        figure = go.Figure()
+                    )
+                ])
             ]),
             html.Div(className = 'column is-4', children = [
                 html.Div(className = 'columns', children = [
@@ -215,7 +220,12 @@ layout = html.Div(className = '', children = [
                         )
                     ]),
                 ]),
-                html.Div(id='users-net-graph', className='box')
+                html.Div(id='users-net-graph', className='box', children = [
+                    dcc.Graph(
+                        id = 'graph-3',
+                        figure = go.Figure()
+                    )
+                ])
             ]),
             html.Div(className = 'column is-4', children = [
                 html.Div(className = 'columns', children = [
