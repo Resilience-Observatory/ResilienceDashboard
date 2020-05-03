@@ -28,8 +28,8 @@ import networkx as nx
 from app import app
 
 #Load data
-keywords = pd.read_csv('data/CoronaMadrid_keywords_ordered_currentflowbetweenness_7_nonfiltered.csv')
-kw_params = ['freq','cfbetweenness','eigenvalue']
+kw_params_1 = ['freq','cfbetweenness','eigenvalue']
+kw_params_2 = ['cfcloseness','cfbetweenness','eigenvalue']
 inform_covid = pd.read_csv('data/inform-covid-analysis-v01_page3-unix.csv', sep=';')
 
 data = [dict(
@@ -62,32 +62,17 @@ layout = dict(
     
 fig_eu = go.FigureWidget(data=data, layout=layout)
 
+#Preload graph posts
+with open('data/PostsCorMadNet7_viz6.cnf', 'rb') as f:
+    Gu2_p = pickle.load(f)
+N_p = Gu2_p.number_of_nodes()
+V_p = Gu2_p.number_of_edges()
 
-#Preload graph
-with open('data/PostsCorMadNet7_viz.cnf', 'rb') as f:
-    Gu2 = pickle.load(f)
-N = Gu2.number_of_nodes()
-V = Gu2.number_of_edges()
-
-labels=[]
-for node in Gu2.nodes.data():
-    #Generamos la etiqueta
-    label = node[0]+' #freq:'+str(node[1]['freq']/20)
-    #Añadir al array
-    labels.append(label)
-
-pos=nx.spring_layout(Gu2)
-
-Xv=[pos[k][0] for k in Gu2.nodes()]
-Yv=[pos[k][1] for k in Gu2.nodes()]
-Xed,Yed=[],[]
-for edge in Gu2.edges():
-    Xed+=[pos[edge[0]][0],pos[edge[1]][0], None]
-    Yed+=[pos[edge[0]][1],pos[edge[1]][1], None]
-
-freqs = []
-for freq in Gu2.nodes.data('freq'):
-    freqs.append(freq[1]/20) #Necesario normalizar de alguna forma
+#Preload graph users
+with open('data/PostsCorMadNetPeople7_viz.cnf', 'rb') as f:
+    Gu2_u = pickle.load(f)
+N_u = Gu2_u.number_of_nodes()
+V_u = Gu2_u.number_of_edges()
 
 #Available colors
 colors = [
@@ -126,11 +111,17 @@ layout = html.Div(className = '', children = [
             )
             
         ]),
-        html.Div(className = 'column is-narrow', children = [
-            html.H1('Twitter posts analysis',className = 'title is-2'),
-        ]),
+        html.H1('Twitter posts analysis',className = 'title is-2'),
         html.Div(className = 'columns', children = [
-            html.Div(className = 'column', children = [
+            html.Div(className = 'column is-2', children = [
+                html.Div(className = 'columns', children = [
+                    html.Div(className = 'column', children = [
+                        html.H1('Word node data',className = 'title is-5'),
+                        html.Div(id='posts-node-data', className='box')
+                    ])
+                ])
+            ]),
+            html.Div(className = 'column is-6', children = [
                 html.Div(className = 'columns', children = [
                     html.Div(className = 'column', children = [
                         html.H1('Posts network graph',className = 'title is-5'),
@@ -138,7 +129,7 @@ layout = html.Div(className = '', children = [
                     ])
                 ])
             ]),
-            html.Div(className = 'column is-one-third', children = [
+            html.Div(className = 'column is-4', children = [
                 html.Div(className = 'columns', children = [
                     html.Div(className = 'column is-narrow', children = [
                         html.H1('Hot topics',className = 'title is-5')
@@ -149,9 +140,9 @@ layout = html.Div(className = '', children = [
                                 "Order parameter",
                                 dcc.Dropdown(
                                     id="param-selector-1",
-                                    options=[{"label": i, "value": i} for i in kw_params],
+                                    options=[{"label": i, "value": i} for i in kw_params_1],
                                     placeholder='Select hot topics order param',
-                                    value=kw_params[1],
+                                    value=kw_params_1[1],
                                     searchable=True,
                                     multi=False,
                                     style=dict(
@@ -180,19 +171,17 @@ layout = html.Div(className = '', children = [
                 html.Div(id='hot-topics', className='box')
             ])
         ]),
-        html.Div(className = 'column is-narrow', children = [
-            html.H1('Twitter users analysis',className = 'title is-2'),
-        ]),
+        html.H1('Twitter users analysis',className = 'title is-2'),
         html.Div(className = 'columns', children = [
-            html.Div(className = 'column', children = [
-                html.Div(className = 'columns', children = [
-                    html.Div(className = 'column', children = [
-                        html.H1('Users network graph',className = 'title is-5'),
-                        html.Div(id='users-net-graph', className='box')
-                    ])
-                ])
+            html.Div(className = 'column is-2', children = [
+                html.H1('User node data',className = 'title is-5'),
+                html.Div(id='users-node-data', className='box')
             ]),
-            html.Div(className = 'column is-one-third', children = [
+            html.Div(className = 'column is-6', children = [
+                html.H1('Users network graph',className = 'title is-5'),
+                html.Div(id='users-net-graph', className='box')
+            ]),
+            html.Div(className = 'column is-4', children = [
                 html.Div(className = 'columns', children = [
                     html.Div(className = 'column is-narrow', children = [
                         html.H1('Relevant users',className = 'title is-5')
@@ -203,9 +192,9 @@ layout = html.Div(className = '', children = [
                                 "Order parameter",
                                 dcc.Dropdown(
                                     id="param-selector-2",
-                                    options=[{"label": i, "value": i} for i in kw_params],
+                                    options=[{"label": i, "value": i} for i in kw_params_2],
                                     placeholder='Select relevant users order param',
-                                    value=kw_params[1],
+                                    value=kw_params_2[1],
                                     searchable=True,
                                     multi=False,
                                     style=dict(
@@ -265,9 +254,18 @@ def gen_selected_country(hoverData) :
 
 # CALLBACK 1 - Posts Network Graph Generation
 @app.callback(Output(component_id = 'posts-net-graph',component_property = 'children'),
-              [Input(component_id = 'param-selector-1',component_property = 'value'),
-              Input(component_id = 'axis-type-1',component_property = 'value')])
-def gen_posts_net_graph(selected_param,axis_type) :
+              [Input(component_id = 'axis-type-1',component_property = 'value')])
+def gen_posts_net_graph(axis_type) :
+
+    pos=nx.spring_layout(Gu2_p)
+
+    Xv=[pos[k][0] for k in Gu2_p.nodes()]
+    Yv=[pos[k][1] for k in Gu2_p.nodes()]
+    Xed,Yed=[],[]
+    for edge in Gu2_p.edges():
+        Xed+=[pos[edge[0]][0],pos[edge[1]][0], None]
+        Yed+=[pos[edge[0]][1],pos[edge[1]][1], None]
+
     trace3=go.Scatter(x=Xed,
         y=Yed,
         mode='lines',
@@ -284,7 +282,7 @@ def gen_posts_net_graph(selected_param,axis_type) :
         name='net',
         marker=dict(
             symbol='circle-dot',
-            size=freqs,
+            size=[Gu2_p.degree[node] for node in Gu2_p.nodes()],
             color=colors[0],
             line=dict(
                 color='black',
@@ -292,7 +290,7 @@ def gen_posts_net_graph(selected_param,axis_type) :
             ),
             opacity=0.9
         ),
-        text=labels,
+        text=[str(node) + ' #degree: ' + str(Gu2_p.degree[node]) for node in Gu2_p.nodes()],
         hoverinfo='text'
     )
     layout2d = go.Layout(
@@ -320,10 +318,38 @@ def gen_posts_net_graph(selected_param,axis_type) :
     return [
         dcc.Graph(
             id = 'graph-1',
-            figure = fig1
+            figure = fig1,
+            hoverData={'points': [{'location': 'Select a country on the map'}]}
         )
     ]
 
+# CALLBACK 1b - Posts node data
+@app.callback(Output(component_id = 'posts-node-data',component_property = 'children'),
+              [Input('graph-1', 'hoverData')])
+def gen_selected_country(hoverData) :
+    
+    try :
+        node = hoverData['points'][0]['text'].split(' #')[0]
+        freq = Gu2_p.nodes[node]['freq']
+        degree = Gu2_p.degree[node]
+        return [
+            html.H1(node,className='title is-4'),
+            html.H1('Degree: {}'.format(degree),className='subtitle is-4'),
+            html.H1('Freq: {}'.format(freq),className='subtitle is-4'),
+            html.A('{} in Google Trends'.format(node),
+                href='https://trends.google.com/trends/explore?q={}'.format(node), 
+                target='_blank'
+            ),
+            html.H1('',className='subtitle is-4'),
+            html.A('{} in Twitter'.format(node),
+                href='https://twitter.com/search?q={}&src=typed_query'.format(node), 
+                target='_blank'
+            )
+        ]
+    except :
+        return [
+            html.H1('Hover a node',className='subtitle is-3')
+        ]
 
 # CALLBACK 2 - Hot topics barchart
 @app.callback(Output(component_id = 'hot-topics',component_property = 'children'),
@@ -331,6 +357,8 @@ def gen_posts_net_graph(selected_param,axis_type) :
               Input(component_id = 'axis-type-1',component_property = 'value')])
 def gen_hot_topics(selected_param,axis_type) :
 
+    keywords = pd.read_csv('data/CoronaMadrid_keywords_ordered_currentflowbetweenness_7_good_clean.csv')
+    
     #Sort values
     kws_df = keywords.sort_values(selected_param,ascending=False).iloc[0:15]
 
@@ -344,10 +372,8 @@ def gen_hot_topics(selected_param,axis_type) :
             name=unique_kw
         ))
 
-
-
     fig.update_layout(
-        height=450,
+        height=460,
         margin=dict(r=0, l=0, t=0, b=0),
         yaxis=dict(
             title=selected_param,
@@ -365,9 +391,20 @@ def gen_hot_topics(selected_param,axis_type) :
 
 # CALLBACK 3 - Users Network Graph Generation
 @app.callback(Output(component_id = 'users-net-graph',component_property = 'children'),
-              [Input(component_id = 'param-selector-2',component_property = 'value'),
-              Input(component_id = 'axis-type-2',component_property = 'value')])
-def gen_users_net_graph(selected_param,axis_type) :
+              [Input(component_id = 'axis-type-2',component_property = 'value')])
+def gen_users_net_graph(axis_type) :
+    
+    nodes_data = Gu2_u.nodes.data()
+
+    pos=nx.spring_layout(Gu2_u)
+
+    Xv=[pos[k][0] for k in Gu2_u.nodes()]
+    Yv=[pos[k][1] for k in Gu2_u.nodes()]
+    Xed,Yed=[],[]
+    for edge in Gu2_u.edges():
+        Xed+=[pos[edge[0]][0],pos[edge[1]][0], None]
+        Yed+=[pos[edge[0]][1],pos[edge[1]][1], None]
+
     trace3=go.Scatter(x=Xed,
         y=Yed,
         mode='lines',
@@ -384,7 +421,7 @@ def gen_users_net_graph(selected_param,axis_type) :
         name='net',
         marker=dict(
             symbol='circle-dot',
-            size=freqs,
+            size=[Gu2_u.degree[node] for node in Gu2_u.nodes()],
             color=colors[0],
             line=dict(
                 color='black',
@@ -392,7 +429,7 @@ def gen_users_net_graph(selected_param,axis_type) :
             ),
             opacity=0.9
         ),
-        text=labels,
+        text=[str(node) + ' #degree: ' + str(Gu2_u.degree[node]) for node in Gu2_u.nodes()],
         hoverinfo='text'
     )
     layout2d = go.Layout(
@@ -413,7 +450,6 @@ def gen_users_net_graph(selected_param,axis_type) :
         }
     )
 
-
     data1=[trace3, trace4]
     fig1=go.Figure(data=data1, layout=layout2d)
 
@@ -425,11 +461,42 @@ def gen_users_net_graph(selected_param,axis_type) :
     ]
 
 
+# CALLBACK 3b - Users node data
+@app.callback(Output(component_id = 'users-node-data',component_property = 'children'),
+              [Input('graph-3', 'hoverData')])
+def gen_selected_country(hoverData) :
+    
+    try :
+        node = hoverData['points'][0]['text'].split(' #')[0]
+        degree = Gu2_u.degree[node]
+        node_dict = Gu2_u.nodes[node]
+        name = node_dict['name']
+        followers = node_dict['followers']
+        following = node_dict['following']
+        favorites = node_dict['favorites']
+        return [
+            html.H1(name,className='title is-4'),
+            html.H1('Degree: {}'.format(degree),className='subtitle is-4'),
+            html.H1('Followers: {}'.format(followers),className='subtitle is-4'),
+            html.H1('Following: {}'.format(following),className='subtitle is-4'),
+            html.H1('Favorites: {}'.format(favorites),className='subtitle is-4'),
+            html.A('{} in Twitter'.format(name),
+                href='https://twitter.com/{}'.format(name[1:]), 
+                target='_blank'
+            )
+        ]
+    except :
+        return [
+            html.H1('Hover a node',className='subtitle is-3')
+        ]
+
 # CALLBACK 4 - Most relevant users
 @app.callback(Output(component_id = 'relevant-users',component_property = 'children'),
               [Input(component_id = 'param-selector-2',component_property = 'value'),
               Input(component_id = 'axis-type-2',component_property = 'value')])
 def gen_relevant_users(selected_param,axis_type) :
+
+    keywords = pd.read_csv('data/CoronaMadrid_users_ordered_eigenvalue_7.csv')
 
     #Sort values
     kws_df = keywords.sort_values(selected_param,ascending=False).iloc[0:15]
@@ -444,10 +511,8 @@ def gen_relevant_users(selected_param,axis_type) :
             name=unique_kw
         ))
 
-
-
     fig.update_layout(
-        height=450,
+        height=460,
         margin=dict(r=0, l=0, t=0, b=0),
         yaxis=dict(
             title=selected_param,
