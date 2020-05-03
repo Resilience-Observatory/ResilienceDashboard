@@ -36,21 +36,15 @@ app.index_string = '''
         <nav class="navbar navlogo" role="navigation" aria-label="main navigation">
 
           <div class="navbar-brand">
-            <div class="navbar-brand">
+          
             <a class="navbar-item logo1" href="https://readymag.com/u1187351608/1830554/" target="_blank">RESILIENCE OBSERVATORY</a>
-            <div class="navbar-burger burger" data-target="navMenu">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-            
 
             <div class="navbar-burger burger" data-target="navMenu">
-              <span></span>
-              <span></span>
-              <span></span>
+             <span></span>
+             <span></span>
+             <span></span>
             </div>
+
           </div>
 
           <div id="navMenu" class="navbar-menu">
@@ -61,6 +55,7 @@ app.index_string = '''
             </div>
 
           </div>
+
         </nav>
 
         <script type="text/javascript">

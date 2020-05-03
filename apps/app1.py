@@ -65,14 +65,10 @@ fig_eu = go.FigureWidget(data=data, layout=layout)
 #Preload graph posts
 with open('data/PostsCorMadNet7_viz6.cnf', 'rb') as f:
     Gu2_p = pickle.load(f)
-N_p = Gu2_p.number_of_nodes()
-V_p = Gu2_p.number_of_edges()
 
 #Preload graph users
 with open('data/PostsCorMadNetPeople7_viz.cnf', 'rb') as f:
     Gu2_u = pickle.load(f)
-N_u = Gu2_u.number_of_nodes()
-V_u = Gu2_u.number_of_edges()
 
 #Available colors
 colors = [
@@ -124,10 +120,28 @@ layout = html.Div(className = '', children = [
             html.Div(className = 'column is-6', children = [
                 html.Div(className = 'columns', children = [
                     html.Div(className = 'column', children = [
-                        html.H1('Posts network graph',className = 'title is-5'),
-                        html.Div(id='posts-net-graph', className='box')
-                    ])
-                ])
+                        html.H1('Posts network graph',className = 'title is-5')
+                    ]),
+                    html.Div(className = 'column is-narrow', children = [
+                        html.Label(
+                            [
+                                "Type:",
+                                dcc.Dropdown(
+                                    id="dim-sel-1",
+                                    options=[{"label": i, "value": i} for i in ['2D','3D']],
+                                    placeholder='Select relevant users order param',
+                                    value='2D',
+                                    searchable=True,
+                                    multi=False,
+                                    style=dict(
+                                        width = 300
+                                    )
+                                )
+                            ]
+                        )
+                    ]),
+                ]),
+                html.Div(id='posts-net-graph', className='box')
             ]),
             html.Div(className = 'column is-4', children = [
                 html.Div(className = 'columns', children = [
@@ -178,7 +192,29 @@ layout = html.Div(className = '', children = [
                 html.Div(id='users-node-data', className='box')
             ]),
             html.Div(className = 'column is-6', children = [
-                html.H1('Users network graph',className = 'title is-5'),
+                html.Div(className = 'columns', children = [
+                    html.Div(className = 'column', children = [
+                        html.H1('Users network graph',className = 'title is-5')
+                    ]),
+                    html.Div(className = 'column is-narrow', children = [
+                        html.Label(
+                            [
+                                "Type:",
+                                dcc.Dropdown(
+                                    id="dim-sel-2",
+                                    options=[{"label": i, "value": i} for i in ['2D','3D']],
+                                    placeholder='Select relevant users order param',
+                                    value='2D',
+                                    searchable=True,
+                                    multi=False,
+                                    style=dict(
+                                        width = 300
+                                    )
+                                )
+                            ]
+                        )
+                    ]),
+                ]),
                 html.Div(id='users-net-graph', className='box')
             ]),
             html.Div(className = 'column is-4', children = [
@@ -228,7 +264,166 @@ layout = html.Div(className = '', children = [
 ])
 
 # FUNCTIONS
+def gen_bar_graph(keywords,selected_param,axis_type) :
+    #Sort values
+    kws_df = keywords.sort_values(selected_param,ascending=False).iloc[0:15]
 
+    unique_kws = kws_df.word.unique().tolist()
+
+    bar_graph = go.Figure()
+    for unique_kw in unique_kws :
+        kw_df = kws_df[kws_df.word == unique_kw]
+        bar_graph.add_trace(go.Bar(x=[unique_kw],
+            y=[kw_df[selected_param].iloc[0]],
+            name=unique_kw
+        ))
+
+    bar_graph.update_layout(
+        height=500,
+        margin=dict(r=0, l=0, t=0, b=0),
+        yaxis=dict(
+            title=selected_param,
+            type=axis_type
+        )
+    )
+    return bar_graph
+    
+
+def gen_graph(G,dim):
+    N = G.number_of_nodes()
+    V = G.number_of_edges()
+
+    if dim == '2D' :
+
+        pos=nx.spring_layout(G)
+
+        Xv=[pos[k][0] for k in G.nodes()]
+        Yv=[pos[k][1] for k in G.nodes()]
+        Xed,Yed=[],[]
+        for edge in G.edges():
+            Xed+=[pos[edge[0]][0],pos[edge[1]][0], None]
+            Yed+=[pos[edge[0]][1],pos[edge[1]][1], None]
+
+        trace3=go.Scatter(
+            x=Xed,
+            y=Yed,
+            mode='lines',
+            line=dict(
+                color=colors[2],
+                width=1.5
+            ),
+            opacity=0.7,
+            hoverinfo='none'
+        )
+        trace4=go.Scatter(
+            x=Xv,
+            y=Yv,
+            mode='markers',
+            name='net',
+            marker=dict(
+                symbol='circle-dot',
+                size=[G.degree[node] for node in G.nodes()],
+                color=colors[0],
+                line=dict(
+                    color='black',
+                    width=1
+                ),
+                opacity=0.9
+            ),
+            text=[str(node) + ' #degree: ' + str(G.degree[node]) for node in G.nodes()],
+            hoverinfo='text'
+        )
+        layout2d = go.Layout(
+            title="",
+            height=500,
+            showlegend=False,
+            margin=dict(r=0, l=0, t=0, b=0),
+            xaxis = {
+                'showgrid':False,
+                'visible':False
+            },
+            yaxis = {
+                'showgrid':False,
+                'showline':False,
+                'zeroline':False,
+                'autorange':'reversed',
+                'visible':False
+            }
+        )
+
+        data1=[trace3, trace4]
+        graph=go.Figure(data=data1, layout=layout2d)
+    else :
+        G_new = nx.convert_node_labels_to_integers(G)
+        pos = nx.spring_layout(G_new, dim=3)
+
+        Xn=[pos[k][0] for k in range(N)]# x-coordinates of nodes
+        Yn=[pos[k][1] for k in range(N)]# y-coordinates
+        Zn=[pos[k][2] for k in range(N)]# z-coordinates
+
+        Xe=[]
+        Ye=[]
+        Ze=[]
+        for e in G_new.edges():
+            Xe+=[pos[e[0]][0],pos[e[1]][0], None]# x-coordinates of edge ends
+            Ye+=[pos[e[0]][1],pos[e[1]][1], None]
+            Ze+=[pos[e[0]][2],pos[e[1]][2], None]
+
+        axis=dict(
+            showbackground=False,
+            showline=False,
+            zeroline=False,
+            showgrid=False,
+            showticklabels=False,
+            title=''
+        )
+        
+        trace1=go.Scatter3d(
+            x=Xe,
+            y=Ye,
+            z=Ze,
+            mode='lines',
+            line=dict(
+                color=colors[2],
+                width=1.5
+            ),
+            opacity=0.7,
+            hoverinfo='none'
+        )
+
+        trace2=go.Scatter3d(
+            x=Xn,
+            y=Yn,
+            z=Zn,
+            name='net',
+            mode='markers',
+            hoverinfo='text',
+            marker=dict(
+                size=[G.degree[node] for node in G.nodes()],
+                color=colors[0],
+                line=dict(
+                    color='black',
+                    width=1
+                ),
+                opacity=0.9
+            ),
+            text=[str(node) + ' #degree: ' + str(G.degree[node]) for node in G.nodes()]
+        )
+
+        layout = go.Layout(
+            title="",
+            height=500,
+            showlegend=False,
+            margin=dict(r=0, l=0, t=0, b=0),
+            scene=dict(
+                xaxis=dict(axis),
+                yaxis=dict(axis),
+                zaxis=dict(axis),
+            ),
+        )
+        data=[trace1, trace2]
+        graph=go.Figure(data=data, layout=layout)
+    return graph
 
 # CALLBACKS
 
@@ -254,71 +449,15 @@ def gen_selected_country(hoverData) :
 
 # CALLBACK 1 - Posts Network Graph Generation
 @app.callback(Output(component_id = 'posts-net-graph',component_property = 'children'),
-              [Input(component_id = 'axis-type-1',component_property = 'value')])
-def gen_posts_net_graph(axis_type) :
+              [Input(component_id = 'dim-sel-1',component_property = 'value')])
+def gen_posts_net_graph(dim) :
 
-    pos=nx.spring_layout(Gu2_p)
-
-    Xv=[pos[k][0] for k in Gu2_p.nodes()]
-    Yv=[pos[k][1] for k in Gu2_p.nodes()]
-    Xed,Yed=[],[]
-    for edge in Gu2_p.edges():
-        Xed+=[pos[edge[0]][0],pos[edge[1]][0], None]
-        Yed+=[pos[edge[0]][1],pos[edge[1]][1], None]
-
-    trace3=go.Scatter(x=Xed,
-        y=Yed,
-        mode='lines',
-        line=dict(
-            color=colors[2],
-            width=1
-        ),
-        opacity=0.5,
-        hoverinfo='none'
-    )
-    trace4=go.Scatter(x=Xv,
-        y=Yv,
-        mode='markers',
-        name='net',
-        marker=dict(
-            symbol='circle-dot',
-            size=[Gu2_p.degree[node] for node in Gu2_p.nodes()],
-            color=colors[0],
-            line=dict(
-                color='black',
-                width=0.5
-            ),
-            opacity=0.9
-        ),
-        text=[str(node) + ' #degree: ' + str(Gu2_p.degree[node]) for node in Gu2_p.nodes()],
-        hoverinfo='text'
-    )
-    layout2d = go.Layout(
-        title="",
-        height=500,
-        showlegend=False,
-        margin=dict(r=0, l=0, t=0, b=0),
-        xaxis = {
-            'showgrid':False,
-            'visible':False
-        },
-        yaxis = {
-            'showgrid':False,
-            'showline':False,
-            'zeroline':False,
-            'autorange':'reversed',
-            'visible':False
-        }
-    )
-
-
-    data1=[trace3, trace4]
-    fig1=go.Figure(data=data1, layout=layout2d)
+    graph1 = gen_graph(Gu2_p,dim)
 
     return [
         dcc.Graph(
             id = 'graph-1',
-            figure = fig1,
+            figure = graph1,
             hoverData={'points': [{'location': 'Select a country on the map'}]}
         )
     ]
@@ -359,104 +498,27 @@ def gen_hot_topics(selected_param,axis_type) :
 
     keywords = pd.read_csv('data/CoronaMadrid_keywords_ordered_currentflowbetweenness_7_good_clean.csv')
     
-    #Sort values
-    kws_df = keywords.sort_values(selected_param,ascending=False).iloc[0:15]
-
-    unique_kws = kws_df.word.unique().tolist()
-
-    fig = go.Figure()
-    for unique_kw in unique_kws :
-        kw_df = kws_df[kws_df.word == unique_kw]
-        fig.add_trace(go.Bar(x=[unique_kw],
-            y=[kw_df[selected_param].iloc[0]],
-            name=unique_kw
-        ))
-
-    fig.update_layout(
-        height=460,
-        margin=dict(r=0, l=0, t=0, b=0),
-        yaxis=dict(
-            title=selected_param,
-            type=axis_type
-        )
-    )
+    graph2 = gen_bar_graph(keywords,selected_param,axis_type)
 
     return [
         dcc.Graph(
             id = 'graph-2',
-            figure = fig
+            figure = graph2
         )
     ]
 
 
 # CALLBACK 3 - Users Network Graph Generation
 @app.callback(Output(component_id = 'users-net-graph',component_property = 'children'),
-              [Input(component_id = 'axis-type-2',component_property = 'value')])
-def gen_users_net_graph(axis_type) :
+              [Input(component_id = 'dim-sel-2',component_property = 'value')])
+def gen_users_net_graph(dim) :
     
-    nodes_data = Gu2_u.nodes.data()
-
-    pos=nx.spring_layout(Gu2_u)
-
-    Xv=[pos[k][0] for k in Gu2_u.nodes()]
-    Yv=[pos[k][1] for k in Gu2_u.nodes()]
-    Xed,Yed=[],[]
-    for edge in Gu2_u.edges():
-        Xed+=[pos[edge[0]][0],pos[edge[1]][0], None]
-        Yed+=[pos[edge[0]][1],pos[edge[1]][1], None]
-
-    trace3=go.Scatter(x=Xed,
-        y=Yed,
-        mode='lines',
-        line=dict(
-            color=colors[2],
-            width=1
-        ),
-        opacity=0.5,
-        hoverinfo='none'
-    )
-    trace4=go.Scatter(x=Xv,
-        y=Yv,
-        mode='markers',
-        name='net',
-        marker=dict(
-            symbol='circle-dot',
-            size=[Gu2_u.degree[node] for node in Gu2_u.nodes()],
-            color=colors[0],
-            line=dict(
-                color='black',
-                width=0.5
-            ),
-            opacity=0.9
-        ),
-        text=[str(node) + ' #degree: ' + str(Gu2_u.degree[node]) for node in Gu2_u.nodes()],
-        hoverinfo='text'
-    )
-    layout2d = go.Layout(
-        title="",
-        height=500,
-        showlegend=False,
-        margin=dict(r=0, l=0, t=0, b=0),
-        xaxis = {
-            'showgrid':False,
-            'visible':False
-        },
-        yaxis = {
-            'showgrid':False,
-            'showline':False,
-            'zeroline':False,
-            'autorange':'reversed',
-            'visible':False
-        }
-    )
-
-    data1=[trace3, trace4]
-    fig1=go.Figure(data=data1, layout=layout2d)
+    graph3 = gen_graph(Gu2_u,dim)
 
     return [
         dcc.Graph(
             id = 'graph-3',
-            figure = fig1
+            figure = graph3
         )
     ]
 
@@ -498,31 +560,11 @@ def gen_relevant_users(selected_param,axis_type) :
 
     keywords = pd.read_csv('data/CoronaMadrid_users_ordered_eigenvalue_7.csv')
 
-    #Sort values
-    kws_df = keywords.sort_values(selected_param,ascending=False).iloc[0:15]
-
-    unique_kws = kws_df.word.unique().tolist()
-
-    fig = go.Figure()
-    for unique_kw in unique_kws :
-        kw_df = kws_df[kws_df.word == unique_kw]
-        fig.add_trace(go.Bar(x=[unique_kw],
-            y=[kw_df[selected_param].iloc[0]],
-            name=unique_kw
-        ))
-
-    fig.update_layout(
-        height=460,
-        margin=dict(r=0, l=0, t=0, b=0),
-        yaxis=dict(
-            title=selected_param,
-            type=axis_type
-        )
-    )
+    graph4 = gen_bar_graph(keywords,selected_param,axis_type)
 
     return [
         dcc.Graph(
             id = 'graph-4',
-            figure = fig
+            figure = graph4
         )
     ]
