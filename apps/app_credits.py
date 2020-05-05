@@ -10,6 +10,7 @@ members = [
     'Carlota Tarazona Lizarraga',
     'Roger Quispe Rondan',
     'Juan Sebastian Ochoa Zambrano',
+    'Juan Garbajosa Sopeña',
     'Carlos García-Mauriño',
     'Alejandro Jarabo Peñas'
 ]
@@ -36,10 +37,14 @@ members_info = {
         'linkedin': 'https://www.linkedin.com/in/juan-sebastian-ochoa-zambrano-485a0013b/'
     },
     members[5]: {
+        'desc' : 'Software engineering professor working on cyber physical systems, software architecture, agile and innovation at UPM.',
+        'linkedin': 'https://www.linkedin.com/in/juan-garbajosa-24043a2/'
+    },
+    members[6]: {
         'desc' : 'Student of Telecommunications Engineering at UPM. GNU/Linux and free (libre) open source software enthusiast.',
         'linkedin': 'https://www.linkedin.com/in/carlos-g-m/'
     },
-    members[6]: {
+    members[7]: {
         'desc' : 'Student of Telecommunications Engineering at UPM.',
         'linkedin': 'https://www.linkedin.com/in/alejandro-jarabo-pe%C3%B1as-aa990a166/'
     }
@@ -51,10 +56,10 @@ members_boxes = [
             html.Div(className = 'columns', children = [
                 html.Div(className = 'column', children = [
                     html.H1(member,className = 'subtitle is-4'),
-                ]), 
+                ]),
                 html.Div(className = 'column is-narrow', children = [
                     html.A('LinkedIn',href=members_info[member]['linkedin'],target='_blank')
-                ]) 
+                ])
             ]),
             html.H1(members_info[member]['desc'],className = 'subtitle is-6')
         ])
